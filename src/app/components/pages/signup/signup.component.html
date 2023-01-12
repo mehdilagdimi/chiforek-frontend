@@ -1,26 +1,23 @@
 
-<div class="bg-white w-full relative flex flex-row justify-center overflow-hidden py-10 px-4">
-  <!-- <div class="w-full hidden sm:w-[250px] md:w-[400px] lg:w-[1200px] bg-grey-50 sm:flex  justify-content-center align-items-center">
-      <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_xhlbndhm.json" class="text-center "
-                     background="transparent" speed="1" loop autoplay></lottie-player>
-  </div> -->
-  <div class="w-[500px] relative bg-white grid grid-cols-12 py-8 px-4 border shadow-md">
+<div class="bg-gray-200/60 h-screen w-full relative flex flex-row justify-center overflow-hidden py-10 px-4">
+
+  <div class="w-[650px] bg-white h-full my-auto relative grid grid-cols-12 py-8 px-4 border shadow-md rounded-xl">
     <div class="w-full flex justify-end p-4 absolute top-0">
-      <a class="text-custPurple font-semibold  cursor-pointer" routerLink="/login">Login?</a>
+      <a class="text-custPurple  cursor-pointer" routerLink="/login">Have an account? <strong>Log In</strong></a>
     </div>
 
-      <div class="flex flex-col justify-around  col-start-2 col-end-12 row-start-1 row-end-4">
+      <div class="flex flex-col justify-around  col-start-2 col-end-12 ">
           <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" method="post" name="loginfom" id="formId">
               <div class="text-center text-lg font-semibold text-black">
-                <img class="h-12 mx-auto mb-2" src="assets/logo.png" alt="logo">
-                  <h3>Signup</h3>
+                <img class="h-12 mx-auto mb-2 " src="assets/logo.png" alt="logo">
+                <h3 class="font-extrabold">Signup</h3>
               </div>
               <div>
-                  <div class="m-5 text-center rounded-sm">
+                  <div class="m-5 ">
                       <!-- <div class="col-span-2 bg-red-200 "></div> -->
                       <label for="address">Username</label>
-                      <div class="border-l-4 border-custPurple rounded-sm">
-                          <input formControlName="username" class="w-full bg-white border shadow-sm border-gray-100 outline-none py-3 px-2" type="text" name="username"
+                      <div class="">
+                          <input formControlName="username" class="w-full rounded-lg border  bg-gray-100 outline-none py-3 px-2" type="text" name="username"
                                  placeholder="Username" required>
                       </div>
                       <div *ngIf="username?.invalid && (username?.dirty || username?.touched)"
@@ -32,11 +29,11 @@
 
                       </div>
                   </div>
-                  <div class="m-5 text-center rounded-sm">
+                  <div class="m-5 ">
                       <!-- <div class="col-span-2 bg-red-200 "></div> -->
                       <label for="address">Email</label>
-                      <div class="border-l-4 border-custPurple rounded-sm">
-                          <input formControlName="email" class="w-full shadow-sm border border-gray-100 {{email?.valid && (email?.dirty || email?.touched) ? 'bg-green-50' : 'bg-white'}} outline-none py-3 px-2" type="email" name="email"
+                      <div class="">
+                          <input formControlName="email" class="w-full rounded-lg border  bg-gray-100 {{email?.valid && (email?.dirty || email?.touched) ? 'bg-green-50' : 'bg-white'}} outline-none py-3 px-2" type="email" name="email"
                                  placeholder="Email" required>
                       </div>
                       <div *ngIf="email?.invalid && (email?.dirty || email?.touched)"
@@ -50,11 +47,30 @@
                           </div>
                       </div>
                   </div>
-                  <div class="m-5 text-center rounded-sm">
+
+                  <div class="m-5 ">
+                    <!-- <div class="col-span-2 bg-red-200 "></div> -->
+                    <label for="address">Phone</label>
+                    <div class="">
+                        <input formControlName="tele" class="w-full rounded-lg border  bg-gray-100 outline-none py-3 px-2" type="text" name="tele"
+                               placeholder="Phone" required>
+                    </div>
+                    <div *ngIf="tele?.invalid && (tele?.dirty || tele?.touched)"
+                    class="text-red-500 text-sm">
+
+                        <div *ngIf="tele?.errors?.['required']">
+                            Phone is required.
+                        </div>
+                    </div>
+
+                  </div>
+
+
+                  <div class="m-5 ">
                       <!-- <div class="col-span-2 bg-red-200 "></div> -->
                       <label for="address">Password</label>
-                      <div class="border-l-4 border-custPurple rounded-sm">
-                          <input formControlName="password" class="w-full shadow-sm bg-white border border-gray-100 outline-none py-3 px-2" type="password" name="password"
+                      <div class="">
+                          <input formControlName="password" class="w-full rounded-lg border  bg-gray-100 outline-none py-3 px-2" type="password" name="password"
                                  placeholder="Password" required>
                       </div>
                       <div *ngIf="password?.invalid && (password?.dirty || password?.touched)"
@@ -69,11 +85,11 @@
                       </div>
                   </div>
 
-                  <div class="m-5 text-center rounded-sm">
+                  <div class="m-5 ">
                       <!-- <div class="col-span-2 bg-red-200 "></div> -->
                       <label for="address">Repeat Password</label>
-                      <div class="border-l-4 border-custPurple rounded-sm">
-                          <input formControlName="repeatpassword" class="w-full shadow-sm bg-white border border-gray-100 outline-none py-3 px-2" type="password" name="repeatpassword"
+                      <div class="">
+                          <input formControlName="repeatpassword" class="w-full rounded-lg border  bg-gray-100 outline-none py-3 px-2" type="password" name="repeatpassword"
                                  placeholder="Repeat Password" required>
                       </div>
                       <div *ngIf="repeatpassword?.invalid && (repeatpassword?.dirty || repeatpassword?.touched)"
@@ -90,52 +106,37 @@
 
 
 
-                <div class="m-5 text-center rounded-sm">
+
+
+
+
+                <div class="m-5">
                   <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                  <label for="address">Phone</label>
-                  <div class="border-l-4 border-custPurple rounded-sm">
-                      <input formControlName="tele" class="w-full bg-white border shadow-sm border-gray-100 outline-none py-3 px-2" type="text" name="tele"
-                             placeholder="Phone" required>
-                  </div>
-                  <div *ngIf="tele?.invalid && (tele?.dirty || tele?.touched)"
-                  class="text-red-500 text-sm">
-
-                      <div *ngIf="tele?.errors?.['required']">
-                          Phone is required.
-                      </div>
+                  <div class="flex justify-start items-center">
+                    <div class="block mt-2">
+                      <p class="h-full align-middle font-semibold">Subscribe to news letter</p>
+                    </div>
+                    <div class="mx-2">
+                        <input formControlName="toSubscribe" type="checkbox" value="true" class="w-full rounded-lg border outline-none "  name="toSubscribe"
+                                [ngModel]="toSubscribe" >
+                    </div>
                   </div>
 
-                </div>
-
-               
-
-                <div class="m-5 text-center rounded-sm">
-                  <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                  <label for="address">Phone</label>
-                  <div class="border-l-4 border-custPurple rounded-sm">
-                      <input formControlName="toSubscribe" class="w-full bg-white border shadow-sm border-gray-100 outline-none py-3 px-2" type="radio" name="toSubscribe"
-                             placeholder="Phone" required>
-                  </div>
-                  <div *ngIf="tele?.invalid && (tele?.dirty || tele?.touched)"
-                  class="text-red-500 text-sm">
-
-                      <div *ngIf="tele?.errors?.['required']">
-                          Phone is required.
-                      </div>
-                  </div>
 
                 </div>
 
 
 
-              <div class="text-center w-full px-5" id="btnContainerId">
-              </div>
+
+                <div class="w-full flex justify-center">
                   <button type="submit" [disabled]="!signupForm.valid" id="submitBtnId"
-                          class='w-full {{!signupForm.valid ? "bg-gray-400" : "bg-custPurple"}}  shadow-sm rounded-sm py-3 text-white text-md font-regular'
+                          class='mx-5 w-full border rounded-lg text-white text-md font-extrabold {{!signupForm.valid ? "bg-gray-200 text-gray-500" : "bg-custGray text-black"}}  shadow-sm rounded-sm py-3 '
                   >
-                      SUBMIT
+                      SIGN UP
                   </button>
+                </div>
               </div>
+
           </form>
 
   </div>

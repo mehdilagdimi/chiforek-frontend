@@ -8,6 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./reservation-form.component.css']
 })
 export class ReservationFormComponent implements OnInit {
+  departMinDate!:any;
   reservationForm!:FormGroup;
   departureSites:any[] = [];
   departureHours:any[] = [];
@@ -15,7 +16,6 @@ export class ReservationFormComponent implements OnInit {
   arrivalHours:any[] = [];
   departureMeetingPoints:any[] = [];
   arrivalMeetingPoints:any[] = [];
-
   selectedSite!:string;
 
   constructor() {
@@ -65,7 +65,7 @@ export class ReservationFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.departMinDate = new Date().toISOString().split('T')[0];
 
   }
 

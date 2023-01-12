@@ -86,7 +86,7 @@
               <div class="my-2 w-full text-center rounded-sm">
                 <!-- <div class="col-span-2 bg-red-200 "></div> -->
                 <label for="address">Date</label>
-                <input class="border h-[50px] w-full px-3 outline-none focus:border focus:border-custGreen1" type="text" placeholder="Enter Date" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" formControlName="departureDate" name="departureDate"  />
+                <input #selectedDepartDateRef class="border h-[50px] w-full px-3 outline-none focus:border focus:border-custGreen1" [min]="departMinDate"  type="text" placeholder="Enter Date" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" formControlName="departureDate" name="departureDate"  />
                  <div
                   *ngIf="
                     departureDate?.invalid &&
@@ -205,7 +205,7 @@
                        <div class="my-2 w-full text-center rounded-sm">
                          <!-- <div class="col-span-2 bg-red-200 "></div> -->
                          <label for="address">Date</label>
-                         <input class="border h-[50px] w-full px-3 outline-none focus:border focus:border-custGreen1" type="text" placeholder="Enter Date" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" formControlName="arrivalDate" name="arrivalDate"  />
+                         <input class="border h-[50px] w-full px-3 outline-none focus:border focus:border-custGreen1" [min]="selectedDepartDateRef.value"  type="text" placeholder="Enter Date" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" formControlName="arrivalDate" name="arrivalDate"  />
                           <div
                            *ngIf="
                              arrivalDate?.invalid &&
@@ -264,7 +264,7 @@
               PARK NOW
             </button>
         </div>
- 
+
 
 
       </form>

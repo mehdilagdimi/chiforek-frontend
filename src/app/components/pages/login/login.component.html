@@ -1,7 +1,7 @@
 
-<div class="bg-gray-200 w-full relative flex min-h-screen flex-row justify-center overflow-hidden py-6 px-4 sm:py-12">
+<div class="bg-gray-200/60 w-full relative flex min-h-screen flex-row justify-center overflow-hidden py-6 px-4 sm:py-12">
 
-  <div class="w-[450px] relative bg-white grid grid-cols-12 grid-rows-6 p-4 border shadow-md">
+  <div class="w-[650px] relative bg-white grid grid-cols-12 grid-rows-6 p-4 border shadow-md rounded-xl">
     <div class="flex flex-col justify-around  col-start-2 col-end-12 row-start-2 row-end-6">
 
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" method="post" name="loginfom" id="formId">
@@ -27,7 +27,7 @@
                 </div>
                 <div class="m-5 text-center ">
                     <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                    <div class=" border-custPurple ">
+                    <div class=" ">
                         <input formControlName="password" class="w-full rounded-lg border bg-gray-50 outline-none py-3 px-2" type="password" name="password"
                                placeholder="Password" required>
                     </div>
