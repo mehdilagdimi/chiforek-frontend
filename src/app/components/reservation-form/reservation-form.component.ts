@@ -1,6 +1,10 @@
+import { ISite } from 'src/app/interfaces/ICity';
+import { ReservationService } from './../../services/reservation/reservation.service';
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { SiteService } from 'src/app/services/reservation/site.service';
 
 @Component({
   selector: 'app-reservation-form',
@@ -8,85 +12,126 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./reservation-form.component.css']
 })
 export class ReservationFormComponent implements OnInit {
-  departMinDate!:any;
   reservationForm!:FormGroup;
-  departureSites:any[] = [];
+  departMinDate!:any;
+  departureSites:ISite[] = [];
+  arrivalSites:ISite[] = [];
   departureHours:any[] = [];
-  arrivalSites:any[] = [];
   arrivalHours:any[] = [];
   departureMeetingPoints:any[] = [];
   arrivalMeetingPoints:any[] = [];
   selectedSite!:string;
+  isLoading:boolean = false;
+  isSuccess!:boolean;
+  showDepartHour:boolean = false;
+  showArriveHour:boolean = false;
 
-  constructor() {
-    // this.offerService.getAddOfferFields().subscribe(
-    //   response => {
-    //              this.offerTypes = response.data.offerType;
-    //              this.educations = response.data.education;
-    //              this.profiles = response.data.profile;
-    //   });
-    this.selectedSite = "hello";
-    this.reservationForm = new FormGroup({
-      departureSite : new FormControl('test',[
-        Validators.required,
-        ],
-      ),
-      departureMeetingPoint: new FormControl('', [
-        Validators.required
-      ]
-      ),
-      arrivalMeetingPoint: new FormControl("CDI",[
-        Validators.required,
-        ],),
-      arrivalSite: new FormControl([
-        Validators.required,
-        ],),
-      departureHour: new FormControl('HOUR',[
-        Validators.required
-        ],),
-      departureDate: new FormControl('',[
-        Validators.required
-        ],),
-      arrivalHour: new FormControl('HOUR',[
-        Validators.required
-        ],),
-      arrivalDate: new FormControl('',[
-        Validators.required
-        ],),
-      departureFlightNumber: new FormControl('',[
-        Validators.required
-        ],),
-      arrivalFlightNumber: new FormControl('',[
-        Validators.required
-        ],),
-    })
+  selectUndefinedOptionValue:any;
 
-    // this.reservationForm.departureDate.setValue(formatDate(new Date(),'yyyy-MM-dd','en'));
+  constructor(private reservationService:ReservationService, private siteService:SiteService, private router:Router) {
+    // get sites
+    this.siteService.getSites().subscribe(
+      response => {
+                 this.departureSites = response.data.data;
+                 this.arrivalSites = response.data.data;
+      });
+
+
   }
 
   ngOnInit(): void {
-    this.departMinDate = new Date().toISOString().split('T')[0];
+    this.reservationForm = new FormGroup({
+      departureSite : new FormControl(null, [
+        Validators.required,
+        ],
+      ),
+      departureMeetingPoint: new FormControl(null, [
+        Validators.required
+      ]
+      ),
+      arrivalMeetingPoint: new FormControl(null,[
+        Validators.required,
+        ],),
+      arrivalSite: new FormControl(null,[
+        Validators.required,
+        ],),
+      departureHour: new FormControl(null,[
+        Validators.required
+        ],),
+      departureDate: new FormControl(null,[
+        Validators.required
+        ],),
+      arrivalHour: new FormControl(null,[
+        Validators.required
+        ],),
+      arrivalDate: new FormControl(null,[
+        Validators.required
+        ],),
+      // departureFlightNumber: new FormControl(null,[
+      //   Validators.required
+      //   ],),
+      // arrivalFlightNumber: new FormControl(null,[
+      //   Validators.required
+      //   ],),
+    })
+
+    this.departMinDate = new Date().toLocaleDateString('pt-br').split( '/' ).reverse( ).join( '-' );
+    console.log(" date ", this.departMinDate)
 
   }
+
+  onDateOrSiteChange(){
+    console.log(" form ", this.reservationForm)
+    if(!this.departureSite?.value || !this.departureDate?.value){
+       return;
+    }
+    this.showDepartHour = true;
+    this.showArriveHour = true;
+    let i = 0, start = 6;
+    let intervals = [0, 15, 30, 45];
+    let hour = start;
+    while(hour <= 24){
+      if(hour <= 9) this.departureHours.push( i == 0 ? `0${hour}:${intervals[i]}0` : `0${hour}:${intervals[i]}`);
+      else this.departureHours.push( i == 0 ? `${hour}:${intervals[i]}0` : `${hour}:${intervals[i]}`);
+
+      if(i == intervals.length - 1) {
+          hour++;
+          i = 0;
+      } else i++;
+    }
+    this.arrivalHours = this.departureHours;
+
+  }
+
 
   onSubmit(event:any) {
+    console.log(" form ", this.reservationForm)
 
-  //   this.offerService.saveOffer(this.addOfferForm.value).subscribe(
-  //     {
-  //       next: resp => {
-  //         console.log("data ", resp );
-  //         if(resp.status == 201){
-
-  //         }
-  //       },
-  //       error: err => {
-  //         this.isSuccess = false
-  //         this.onError()
-  //       }
-  //     }).add(() => {
-  //       this.displayCompletionAnimation();
-  //     });
+    this.isLoading = true;
+    this.reservationService.saveReservation(this.reservationForm.value).subscribe(
+      {
+        next: (resp:any) => {
+          console.log("data ", resp );
+          if(resp.status == 201){
+            this.onSuccess();
+          }
+        },
+        error: err => {
+          this.onError()
+        }
+      }).add(() => {
+        this.isLoading = false;
+      });
   }
+
+  onSuccess(){
+    this.isSuccess = true;
+  }
+
+  onError(){
+    this.isSuccess = false;
+  }
+
 
 
   get departureSite (){ return this.reservationForm.get('departureSite')};

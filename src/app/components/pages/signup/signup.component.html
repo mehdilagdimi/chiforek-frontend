@@ -7,7 +7,7 @@
     </div>
 
       <div class="flex flex-col justify-around  col-start-2 col-end-12 ">
-          <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" method="post" name="loginfom" id="formId">
+          <form [formGroup]="signupForm" (ngSubmit)="onSubmit($event)" method="post" name="loginfom" id="formId">
               <div class="text-center text-lg font-semibold text-black">
                 <img class="h-12 mx-auto mb-2 " src="assets/logo.png" alt="logo">
                 <h3 class="font-extrabold">Signup</h3>
@@ -18,7 +18,7 @@
                       <label for="address">Username</label>
                       <div class="">
                           <input formControlName="username" class="w-full rounded-lg border  bg-gray-100 outline-none py-3 px-2" type="text" name="username"
-                                 placeholder="Username" required>
+                                 placeholder="Full Name" required>
                       </div>
                       <div *ngIf="username?.invalid && (username?.dirty || username?.touched)"
                       class="text-red-500 text-sm">
@@ -71,7 +71,7 @@
                       <label for="address">Password</label>
                       <div class="">
                           <input formControlName="password" class="w-full rounded-lg border  bg-gray-100 outline-none py-3 px-2" type="password" name="password"
-                                 placeholder="Password" required>
+                                 placeholder="******" required>
                       </div>
                       <div *ngIf="password?.invalid && (password?.dirty || password?.touched)"
                       class="text-red-500 text-sm">
@@ -90,7 +90,7 @@
                       <label for="address">Repeat Password</label>
                       <div class="">
                           <input formControlName="repeatpassword" class="w-full rounded-lg border  bg-gray-100 outline-none py-3 px-2" type="password" name="repeatpassword"
-                                 placeholder="Repeat Password" required>
+                                 placeholder="******" required>
                       </div>
                       <div *ngIf="repeatpassword?.invalid && (repeatpassword?.dirty || repeatpassword?.touched)"
                       class="text-red-500 text-sm">
@@ -132,7 +132,12 @@
                   <button type="submit" [disabled]="!signupForm.valid" id="submitBtnId"
                           class='mx-5 w-full border rounded-lg text-white text-md font-extrabold {{!signupForm.valid ? "bg-gray-200 text-gray-500" : "bg-custGray text-black"}}  shadow-sm rounded-sm py-3 '
                   >
-                      SIGN UP
+                  <ng-container *ngIf="loading">
+                    Loading...
+                  </ng-container>
+                  <ng-container *ngIf="!loading">
+                    SIGN UP
+                  </ng-container>
                   </button>
                 </div>
               </div>

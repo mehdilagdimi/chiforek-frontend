@@ -1,6 +1,9 @@
+import { ReservationService } from './../../../services/reservation/reservation.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SignupRequest } from 'src/app/interfaces/signupRequest';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -8,86 +11,70 @@ import { SignupRequest } from 'src/app/interfaces/signupRequest';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  loading!:boolean;
   isSuccess!:Boolean;
   loadingSignupResult!:Boolean;
   animationSrc!:string;
   signupForm!:FormGroup;
   signupRequest!:SignupRequest;
 
-  constructor() {
+  constructor(private authService:AuthService, private router:Router) {
     this.signupForm = new FormGroup({
-      username : new FormControl('Full Name',[
+      username : new FormControl('',[
         Validators.required,
         ],
       ),
-      email: new FormControl('Email', [
+      email: new FormControl('', [
         Validators.required,
         Validators.email
       ]
       ),
-      password: new FormControl('Password',[
+      password: new FormControl('',[
         Validators.required,
         // Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")
         ],),
-      repeatpassword: new FormControl('Repeat Password',[
+      repeatpassword: new FormControl('',[
         Validators.required,
         // Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")
         ],),
       tele: new FormControl('',[
         Validators.required
         ],),
-      toSubscribe: new FormControl(true,[
+      toSubscribe: new FormControl('',[
 
         ],),
 
     })
-    // this.signupForm.setValue({role : this.roles[0]})
-
   }
 
   ngOnInit(): void {
   }
 
 
-  onSubmit() {
+  onSubmit(event:any) {
+    this.loading = true;
+    console.log(" isnode ")
     const {repeatpassword, ...rest} = this.signupForm.value;
 
-    console.log(rest)
-    // Object.keys(this.signupForm.value)
-    // .forEach(key => {
-    //   if(this.signupRequest.hasOwnProperty(key)){
-    //     console.log("key " + key)
-    //     this.signupRequest[key as keyof SignupRequest] = this.signupForm.value[key];
-    //   }
-    // });
-
-    // console.warn(this.signupRequest);
-    // //signup user
-    // this.authService.signup(rest).subscribe(
-    //   {
-    //     next: data => {
-    //       console.log("data ", data );
-    //       this.isSuccess = true;
-    //     },
-    //     error: err => this.isSuccess = false
-    //   }).add(() => {
-    //     this.displayCompletionAnimation();
-    //   });
+    console.warn(this.signupRequest);
+    //signup user
+    this.authService.signup(rest).subscribe(
+      {
+        next: data => {
+          console.log("data ", data );
+          this.isSuccess = true;
+        },
+        error: err => this.isSuccess = false
+      }).add(() => {
+        this.loading = false;
+        if(!this.isSuccess) return;
+        this.router.navigate(['/home'])
+        .then(() => {
+          window.location.reload();
+        });
+      });
   }
 
-  displayCompletionAnimation(){
-    // if(this.isSuccess) this.animationSrc = "https://assets3.lottiefiles.com/packages/lf20_lk80fpsm.json";
-    // else this.animationSrc = "https://assets9.lottiefiles.com/packages/lf20_q9ik4qqj.json";
-    // this.loadingSignupResult = true;
-
-    // setTimeout(()=> {
-    //   this.loadingSignupResult = false;
-    //   this.router.navigate(['/login'])
-    //           .then(() => {
-    //             window.location.reload();
-    //         });
-    // }, 1500);
-  }
 
   get username (){ return this.signupForm.get('username')};
   get tele (){ return this.signupForm.get('tele')};

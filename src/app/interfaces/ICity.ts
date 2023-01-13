@@ -1,12 +1,10 @@
-interface ICity {
-  results : [
-    {
-      objectId?:Number,
-      asciiname?: String;
-      createdA: String;
-      updatedAt: String;
-    }
-  ]
+interface ISite {
+      id:Number,
+      name: String;
+      rate: Number;
+      addedPrice: Number;
+      isEnabled: Boolean;
+
 }
 
-export { ICity };
+export { ISite };

@@ -6,13 +6,38 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { LocalStorageService } from '../services/auth/local-storage.service';
+import { JwtHandlerService } from '../services/auth/jwt-handler.service';
 
 @Injectable()
 export class AppHttpInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor(
+    private jwtService:JwtHandlerService,
+    private authStorageService:LocalStorageService,
+  ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return next.handle(request);
+
+    const token = this.authStorageService.get("govalet-token");
+    this.jwtService.setToken(token!);
+
+
+    if (token) {
+      if(this.jwtService.isTokenExpired()) {
+        this.authStorageService.remove("govalet-token");
+        return next.handle(request);
+      }
+
+      const clonedReq = request.clone({
+          headers: request.headers
+                .set("Authorization", "Bearer " + token)
+      });
+
+      return next.handle(clonedReq);
+    } else {
+        return next.handle(request);
+    }
+
   }
 }

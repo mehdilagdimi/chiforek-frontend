@@ -58,7 +58,15 @@
                   <button type="submit" [disabled]="!loginForm.valid" id="submitBtnId"
                           class="w-full mx-4 inline-block border rounded-lg {{!loginForm.valid ? 'bg-gray-200 text-gray-500' : 'bg-custGray text-black'}}  py-3 text-white font-semibold"
                   >
-                      LOGIN
+                  <!-- <div *ngIf="!loading" class="animate-spin text-center bg-green-600 h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
+                  </div> -->
+                  <ng-container *ngIf="loading">
+                    Loading...
+                  </ng-container>
+                  <ng-container *ngIf="!loading">
+                    LOGIN
+                  </ng-container>
+
                   </button>
 
                 </div>

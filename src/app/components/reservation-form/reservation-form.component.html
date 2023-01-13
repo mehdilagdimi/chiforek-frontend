@@ -15,26 +15,26 @@
 
               <!-- Departure Site -->
               <!-- <div class="my-0 absolute h-10 bg-custGray "> -->
-                <h2 class="text-custGreen1">DEPARTURE</h2>
+                <h2 class="text-custGreen1 text-center">DEPARTURE</h2>
               <!-- </div> -->
-              <div class="my-2 h-full text-center rounded-sm">
+              <div class="my-2  h-full rounded-sm">
                 <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                <label for="address">Departure Site</label>
+                <label for="address" class="mx-2 pb-2 font-semibold">SITE</label>
                 <select
                   id="departureSite"
                   formControlName="departureSite"
                   name="departureSite"
                   class="border h-[50px] w-full px-4 outline-none rounded-md text-sm focus:border focus:border-custGreen1"
-
+                  (change)="onDateOrSiteChange()"
                 >
-                <option [ngValue]="" [selected]="true" disabled="disabled">Select depature site</option>
-                  <option
-
-                    *ngFor="let departureSite of departureSites"
-                    [ngValue]="departureSite"
-                  >
-                    {{ departureSite }}
-                  </option>
+                <!-- <option ngValue="undefined" [selected]="true" disabled="disabled">Select depature site</option> -->
+                <option [ngValue]="null" disabled>Select depature site</option>
+                <option
+                *ngFor="let departureSite of departureSites"
+                [ngValue]="departureSite.id"
+                >
+                {{ departureSite.name }}
+              </option>
                 </select>
                 <div
                   *ngIf="
@@ -51,17 +51,17 @@
 
 
            <!-- Arrival -->
-              <div class="my-2 w-full text-center rounded-sm">
+              <div class="my-2  w-full rounded-sm">
                 <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                <label for="address">Meeting Point</label>
+                <label for="address" class="mx-2 pb-2 font-semibold">MEETING POINT</label>
                 <select
                   id="departureMeetingPoint"
                   formControlName="departureMeetingPoint"
                   name="departureMeetingPoint"
                   class="border h-[50px] w-full px-4 outline-none rounded-md text-sm focus:border focus:border-custGreen1"
                 >
-                <option [ngValue]="" [selected]="true">Select meeting point</option>
-
+                <option [ngValue]="null" disabled>Select meeting point</option>
+                <option [ngValue]="1">Terminal 1</option>
                   <option
                     *ngFor="let departureMeetingPoint of departureMeetingPoints"
                     [ngValue]="departureMeetingPoint"
@@ -83,10 +83,10 @@
               </div>
 
               <!-- Departure Date -->
-              <div class="my-2 w-full text-center rounded-sm">
+              <div class="my-2  w-full rounded-sm">
                 <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                <label for="address">Date</label>
-                <input #selectedDepartDateRef class="border h-[50px] w-full px-3 outline-none focus:border focus:border-custGreen1" [min]="departMinDate"  type="text" placeholder="Enter Date" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" formControlName="departureDate" name="departureDate"  />
+                <label for="address" class="mx-2 pb-2 font-semibold">DATE</label>
+                <input #selectedDepartDateRef (change)="onDateOrSiteChange()" class="border h-[50px] w-full px-3 outline-none focus:border focus:border-custGreen1" [min]="departMinDate"  type="text" placeholder="Enter Date" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" formControlName="departureDate" name="departureDate"  />
                  <div
                   *ngIf="
                     departureDate?.invalid &&
@@ -101,16 +101,16 @@
               </div>
 
                <!-- CHECKIN  HOUR-->
-               <div class="my-2 w-full text-center rounded-sm">
+               <div *ngIf="showDepartHour" class="my-2  w-full rounded-sm">
                 <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                <label for="address">Check in</label>
+                <label for="address" class="mx-2 pb-2 font-semibold">CHECK IN</label>
                 <select
                 id="departureHour"
                 formControlName="departureHour"
                 name="departureHour"
                 class="border h-[50px] w-full px-4 outline-none rounded-md text-sm focus:border focus:border-custGreen1"
               >
-              <option [ngValue]="" [selected]="true">RDV</option>
+              <option [ngValue]="null" disabled>RDV</option>
 
                 <option
                   *ngFor="let departureHour of departureHours"
@@ -118,7 +118,8 @@
                 >
                   {{ departureHour }}
                 </option>
-              </select>                          <div
+              </select>
+              <div
                   *ngIf="
                     departureHour?.invalid &&
                     (departureHour?.dirty || departureHour?.touched)
@@ -137,29 +138,29 @@
 
 
                        <!-- Arrival Site -->
-                       <h2 class="text-custGreen1">ARRIVAL</h2>
-                       <div class="my-2 w-full text-center rounded-sm">
+                       <h2 class="text-custGreen1 text-center">ARRIVAL</h2>
+                       <div class="my-2  w-full rounded-sm">
                          <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                         <label for="address">Arrival Site</label>
+                         <label for="address" class="mx-2 pb-2 font-semibold">SITE</label>
                          <select
-                           id="departureSite"
-                           formControlName="departureSite"
+                           id="arrivalSite"
+                           formControlName="arrivalSite"
                            name="departureSite"
                            class="border h-[50px] w-full px-3 outline-none rounded-md text-sm focus:border focus:border-custGreen1 "
                          >
-                         <option [ngValue]="" [selected]="true">Select arrival site</option>
+                          <option [ngValue]="null" disabled>Select arrival site</option>
 
                            <option
-                             *ngFor="let departureSite of departureSites"
-                             [ngValue]="departureSite"
+                             *ngFor="let arrivalSite of arrivalSites"
+                             [ngValue]="arrivalSite.id"
                            >
-                             {{ departureSite }}
+                             {{ arrivalSite.name }}
                            </option>
                          </select>
                          <div
                            *ngIf="
-                             departureSite?.invalid &&
-                             (departureSite?.dirty || departureSite?.touched)
+                             arrivalSite?.invalid &&
+                             (arrivalSite?.dirty || arrivalSite?.touched)
                            "
                            class="text-red-500 text-sm"
                          >
@@ -170,16 +171,17 @@
                        </div>
 
 
-                       <div class="my-2 w-full text-center rounded-sm">
+                       <div class="my-2  w-full rounded-sm">
                          <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                         <label for="address">Meeting Point</label>
+                         <label for="address" class="mx-2 pb-2 font-semibold">MEETING POINT</label>
                          <select
                            id="arrivalMeetingPoint"
                            formControlName="arrivalMeetingPoint"
                            name="arrivalMeetingPoint"
                            class="border h-[50px] w-full px-4 outline-none rounded-md text-sm focus:border focus:border-custGreen1"
                          >
-                         <option [ngValue]="" [selected]="true">Select meeting point</option>
+                         <option [ngValue]="null" disabled>Select meeting point</option>
+                         <option [ngValue]="1">Terminal 1</option>
 
                            <option
                              *ngFor="let arrivalMeetingPoint of arrivalMeetingPoints"
@@ -202,9 +204,9 @@
                        </div>
 
                        <!-- Arrival Date -->
-                       <div class="my-2 w-full text-center rounded-sm">
+                       <div class="my-2  w-full rounded-sm">
                          <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                         <label for="address">Date</label>
+                         <label for="address" class="mx-2 pb-2 font-semibold">DATE</label>
                          <input class="border h-[50px] w-full px-3 outline-none focus:border focus:border-custGreen1" [min]="selectedDepartDateRef.value"  type="text" placeholder="Enter Date" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" formControlName="arrivalDate" name="arrivalDate"  />
                           <div
                            *ngIf="
@@ -220,16 +222,16 @@
                        </div>
 
                        <!-- CHECKOUT  HOUR-->
-                       <div class="my-2 w-full text-center rounded-sm">
+                       <div *ngIf="showArriveHour"class="my-2  w-full rounded-sm">
                          <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                         <label for="address">Check out</label>
+                         <label for="address" class="mx-2 pb-2 font-semibold">CHECK OUT</label>
                          <select
                          id="arrivalHour"
                          formControlName="arrivalHour"
                          name="arrivalHour"
                          class="border h-[50px] w-full px-4 outline-none rounded-md text-sm focus:border focus:border-custGreen1"
                        >
-                       <option [ngValue]="" [selected]="true">RDV</option>
+                       <option [ngValue]="null" disabled>RDV</option>
 
                          <option
                            *ngFor="let arrivalHour of arrivalHours"
@@ -252,7 +254,6 @@
 
 
 
-
               <button
               type="submit"
               [disabled]="!reservationForm.valid"
@@ -261,7 +262,13 @@
                 !reservationForm.valid ? 'bg-gray-400' : 'bg-custGreen1'
               }}  shadow-sm rounded-md py-3 text-white text-lg font-semibold"
             >
-              PARK NOW
+            <ng-container *ngIf="isLoading">
+              Loading...
+            </ng-container>
+            <ng-container *ngIf="!isLoading">
+              RESERVE NOW
+            </ng-container>
+
             </button>
         </div>
 

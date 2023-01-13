@@ -1,7 +1,6 @@
-import { Timestamp } from "rxjs";
 import { User } from "./user";
 
-interface Offer {
+interface Reservation {
   id?:Number,
   title: String;
   publicationDate: Date;
@@ -22,4 +21,4 @@ interface Offer {
 }
 
 
-export { Offer };
+export { Reservation };
