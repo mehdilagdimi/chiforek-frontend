@@ -15,6 +15,12 @@ import { FooterComponent } from './components/layout/footer/footer.component';
 import { ReservationFormComponent } from './components/reservation-form/reservation-form.component';
 import { ReservationSummaryComponent } from './components/reservation-summary/reservation-summary.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OurServicesComponent } from './components/sections/our-services/our-services.component';
+import { AboutComponent } from './components/sections/about/about.component';
+import { FooterUpperSectionComponent } from './components/layout/footer-upper-section/footer-upper-section.component';
+import { NewLetterComponent } from './components/layout/new-letter/new-letter.component';
+import { ReviewsHomeComponent } from './components/layout/reviews-home/reviews-home.component';
+import { GetInTouchComponent } from './components/layout/get-in-touch/get-in-touch.component';
 
 @NgModule({
   schemas: [
@@ -29,7 +35,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavbarComponent,
     FooterComponent,
     ReservationFormComponent,
-    ReservationSummaryComponent
+    ReservationSummaryComponent,
+    OurServicesComponent,
+    AboutComponent,
+    FooterUpperSectionComponent,
+    NewLetterComponent,
+    ReviewsHomeComponent,
+    GetInTouchComponent
   ],
   imports: [
     BrowserModule,
