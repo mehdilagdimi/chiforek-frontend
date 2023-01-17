@@ -5,7 +5,7 @@
     >
       <form
         [formGroup]="reservationForm"
-        (ngSubmit)="onSubmit($event)"
+        (ngSubmit)="onFormSubmit($event)"
         method="post"
         name="reservationForm"
         id="formId"
@@ -254,20 +254,22 @@
 
 
 
-              <button
-              type="submit"
-              [disabled]="!reservationForm.valid"
-              id="submitBtnId"
-              class="w-full my-4 {{
-                !reservationForm.valid ? 'bg-gray-400' : 'bg-custGreen1'
+
+            <!-- !reservationForm.valid ? 'bg-gray-400' : 'bg-custGreen1' -->
+            <button
+            type="submit"
+            [disabled]="!reservationForm.valid"
+            id="submitBtnId"
+            class="w-full my-4 {{
+                !reservationForm.valid ? 'bg-gray-400' : 'bg-green-800/50'
               }}  shadow-sm rounded-md py-3 text-white text-lg font-semibold"
             >
-            <ng-container *ngIf="isLoading">
-              Loading...
-            </ng-container>
-            <ng-container *ngIf="!isLoading">
-              RESERVE NOW
-            </ng-container>
+              <ng-container *ngIf="isLoading">
+                Loading...
+              </ng-container>
+              <ng-container *ngIf="!isLoading">
+                RESERVE NOW
+              </ng-container>
 
             </button>
         </div>

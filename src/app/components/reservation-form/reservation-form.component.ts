@@ -1,7 +1,7 @@
 import { ISite } from 'src/app/interfaces/ICity';
 import { ReservationService } from './../../services/reservation/reservation.service';
 import { formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SiteService } from 'src/app/services/reservation/site.service';
@@ -25,6 +25,9 @@ export class ReservationFormComponent implements OnInit {
   isSuccess!:boolean;
   showDepartHour:boolean = false;
   showArriveHour:boolean = false;
+  @Output() public showHourEvent = new EventEmitter();
+  @Output() public toggleShowDetailedForm = new EventEmitter();
+  isSubmit:Boolean = false;
 
   selectUndefinedOptionValue:any;
 
@@ -87,6 +90,8 @@ export class ReservationFormComponent implements OnInit {
     }
     this.showDepartHour = true;
     this.showArriveHour = true;
+    this.showHourEvent.emit(true);
+
     let i = 0, start = 6;
     let intervals = [0, 15, 30, 45];
     let hour = start;
@@ -103,6 +108,15 @@ export class ReservationFormComponent implements OnInit {
 
   }
 
+
+  onFormSubmit(event:any){
+    if(this.isSubmit){
+      this.onSubmit(event);
+    } else {
+      this.toggleShowDetailedForm.emit(true);
+    }
+
+  }
 
   onSubmit(event:any) {
     console.log(" form ", this.reservationForm)

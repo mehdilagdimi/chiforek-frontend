@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(private router:Router, private authService:AuthService, private jwtService:JwtHandlerService) { }
 
- 
+
   ngOnInit(): void {
     // this.userEmail = this.jwtService.getEmail()!;
     // this.userRole = this.jwtService.getRole()!;
@@ -34,15 +34,17 @@ export class NavbarComponent implements OnInit {
 
   navigateToHome(){
     this.router.navigateByUrl("/home")
+    .then(() => {
+      window.location.reload();
+    });
   }
 
   logout() {
-    // console.log(" inside logout")
-    // this.authService.logout();
-    // this.router.navigate(['/login'])
-    // .then(() => {
-    //   window.location.reload();
-    // });
+    this.authService.logout();
+    this.router.navigate(['/login'])
+    .then(() => {
+      window.location.reload();
+    });
   }
 
 }

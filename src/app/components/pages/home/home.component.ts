@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   showForm:Boolean = false;
+  showTransition:Boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
