@@ -25,6 +25,7 @@ export class ReservationFormComponent implements OnInit {
   isSuccess!:boolean;
   showDepartHour:boolean = false;
   showArriveHour:boolean = false;
+  showQuote:boolean = false;
   @Output() public showHourEvent = new EventEmitter();
   @Output() public toggleShowDetailedForm = new EventEmitter();
   isSubmit:Boolean = false;
@@ -83,6 +84,16 @@ export class ReservationFormComponent implements OnInit {
 
   }
 
+  showDetailedForm(event:any){
+    this.showQuote = false;
+    this.toggleShowDetailedForm.emit(event)
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+});
+  }
+
   onDateOrSiteChange(){
     console.log(" form ", this.reservationForm)
     if(!this.departureSite?.value || !this.departureDate?.value){
@@ -113,8 +124,10 @@ export class ReservationFormComponent implements OnInit {
     if(this.isSubmit){
       this.onSubmit(event);
     } else {
-      this.toggleShowDetailedForm.emit(true);
+      this.showQuote = true;
+
     }
+
 
   }
 
@@ -147,6 +160,9 @@ export class ReservationFormComponent implements OnInit {
   }
 
 
+  scrollToElement($element:any){
+    $element.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+  }
 
   get departureSite (){ return this.reservationForm.get('departureSite')};
   get arrivalSite (){ return this.reservationForm.get('arrivalSite')};

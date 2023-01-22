@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageService } from './services/auth/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +10,9 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'govalet-app';
-  constructor(private router:Router){
-
+  constructor(private router:Router, private translateService:TranslateService){
+    this.translateService.setDefaultLang('fr');
+    this.translateService.use(localStorage.getItem("lang") || "fr")
   }
 
   hasRoute(routes:string[]) :boolean{

@@ -1,4 +1,4 @@
-<div class="bg-white w-full h-auto flex flex-row justify-center">
+<div class="bg-white h-auto flex flex-col justify-center shadow-lg border rounded-xl p-8 mx-3">
   <div class="w-full bg-white grid grid-cols-12">
     <div
       class="flex flex-col justify-around col-start-2 col-end-12"
@@ -82,55 +82,62 @@
                 </div>
               </div>
 
+              <div class="flex justify-between">
+                  <div class="mr-1 my-2 w-full rounded-sm">
+                    <!-- <div class="col-span-2 bg-red-200 "></div> -->
+                    <label for="address" class="mx-2 pb-2 font-semibold">DATE</label>
+                    <input #selectedDepartDateRef (change)="onDateOrSiteChange()" class="border h-[50px] w-full rounded-md px-3 outline-none focus:border focus:border-custGreen1" [min]="departMinDate"  type="text" placeholder="Enter Date" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" formControlName="departureDate" name="departureDate"  />
+                    <div
+                      *ngIf="
+                        departureDate?.invalid &&
+                        (departureDate?.dirty || departureDate?.touched)
+                      "
+                      class="text-red-500 text-sm"
+                    >
+                      <div *ngIf="departureDate?.errors?.['required']">
+                        Departure Date Point required.
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <!-- CHECKIN  HOUR-->
+                  <div *ngIf="showDepartHour" class="ml-1 my-2  w-full rounded-sm">
+                    <!-- <div class="col-span-2 bg-red-200 "></div> -->
+                    <label for="address" class="mx-2 pb-2 font-semibold">CHECK IN</label>
+                    <select
+                    id="departureHour"
+                    formControlName="departureHour"
+                    name="departureHour"
+                    [ngClass]="!showDepartHour? 'opacity-0' : 'opacity-100'"
+                    class="border h-[50px] w-full px-4 outline-none rounded-md text-sm focus:border focus:border-custGreen1"
+                  >
+                  <option [ngValue]="null" disabled>RDV</option>
+
+                    <option
+                      *ngFor="let departureHour of departureHours"
+                      [ngValue]="departureHour"
+                    >
+                      {{ departureHour }}
+                    </option>
+                  </select>
+                  <div
+                      *ngIf="
+                        departureHour?.invalid &&
+                        (departureHour?.dirty || departureHour?.touched)
+                      "
+                      class="text-red-500 text-sm"
+                    >
+                      <div *ngIf="departureHour?.errors?.['required']">
+                      departureHour required.
+                      </div>
+                    </div>
+                  </div>
+              </div>
               <!-- Departure Date -->
-              <div class="my-2  w-full rounded-sm">
-                <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                <label for="address" class="mx-2 pb-2 font-semibold">DATE</label>
-                <input #selectedDepartDateRef (change)="onDateOrSiteChange()" class="border h-[50px] w-full px-3 outline-none focus:border focus:border-custGreen1" [min]="departMinDate"  type="text" placeholder="Enter Date" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" formControlName="departureDate" name="departureDate"  />
-                 <div
-                  *ngIf="
-                    departureDate?.invalid &&
-                    (departureDate?.dirty || departureDate?.touched)
-                  "
-                  class="text-red-500 text-sm"
-                >
-                  <div *ngIf="departureDate?.errors?.['required']">
-                    Departure Date Point required.
-                  </div>
-                </div>
-              </div>
 
-               <!-- CHECKIN  HOUR-->
-               <div *ngIf="showDepartHour" class="my-2  w-full rounded-sm">
-                <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                <label for="address" class="mx-2 pb-2 font-semibold">CHECK IN</label>
-                <select
-                id="departureHour"
-                formControlName="departureHour"
-                name="departureHour"
-                class="border h-[50px] w-full px-4 outline-none rounded-md text-sm focus:border focus:border-custGreen1"
-              >
-              <option [ngValue]="null" disabled>RDV</option>
 
-                <option
-                  *ngFor="let departureHour of departureHours"
-                  [ngValue]="departureHour"
-                >
-                  {{ departureHour }}
-                </option>
-              </select>
-              <div
-                  *ngIf="
-                    departureHour?.invalid &&
-                    (departureHour?.dirty || departureHour?.touched)
-                  "
-                  class="text-red-500 text-sm"
-                >
-                  <div *ngIf="departureHour?.errors?.['required']">
-                   departureHour required.
-                  </div>
-                </div>
-              </div>
+
 
 
 
@@ -203,54 +210,58 @@
                          </div>
                        </div>
 
-                       <!-- Arrival Date -->
-                       <div class="my-2  w-full rounded-sm">
-                         <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                         <label for="address" class="mx-2 pb-2 font-semibold">DATE</label>
-                         <input class="border h-[50px] w-full px-3 outline-none focus:border focus:border-custGreen1" [min]="selectedDepartDateRef.value"  type="text" placeholder="Enter Date" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" formControlName="arrivalDate" name="arrivalDate"  />
-                          <div
-                           *ngIf="
-                             arrivalDate?.invalid &&
-                             (arrivalDate?.dirty || arrivalDate?.touched)
-                           "
-                           class="text-red-500 text-sm"
-                         >
-                           <div *ngIf="arrivalDate?.errors?.['required']">
-                             Arrival Date Point required.
-                           </div>
-                         </div>
+
+                       <div class="flex justify-between">
+                              <!-- Arrival Date -->
+                          <div class="mr-1 my-2  w-full rounded-sm">
+                            <!-- <div class="col-span-2 bg-red-200 "></div> -->
+                            <label for="address" class="mx-2 pb-2 font-semibold">DATE</label>
+                            <input class="border h-[50px] w-full px-3 rounded-md outline-none focus:border focus:border-custGreen1" [min]="selectedDepartDateRef.value"  type="text" placeholder="Enter Date" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" formControlName="arrivalDate" name="arrivalDate"  />
+                              <div
+                              *ngIf="
+                                arrivalDate?.invalid &&
+                                (arrivalDate?.dirty || arrivalDate?.touched)
+                              "
+                              class="text-red-500 text-sm"
+                            >
+                              <div *ngIf="arrivalDate?.errors?.['required']">
+                                Arrival Date Point required.
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- CHECKOUT  HOUR-->
+                          <div *ngIf="showArriveHour"class="ml-1 my-2  w-full rounded-sm">
+                            <!-- <div class="col-span-2 bg-red-200 "></div> -->
+                            <label for="address" class="mx-2 pb-2 font-semibold">CHECK OUT</label>
+                            <select
+                            id="arrivalHour"
+                            formControlName="arrivalHour"
+                            name="arrivalHour"
+                            class="border h-[50px] w-full px-4 outline-none rounded-md text-sm focus:border focus:border-custGreen1"
+                          >
+                          <option [ngValue]="null" disabled>RDV</option>
+
+                            <option
+                              *ngFor="let arrivalHour of arrivalHours"
+                              [ngValue]="arrivalHour"
+                            >
+                              {{ arrivalHour }}
+                            </option>
+                          </select>                          <div
+                              *ngIf="
+                                arrivalHour?.invalid &&
+                                (arrivalHour?.dirty || arrivalHour?.touched)
+                              "
+                              class="text-red-500 text-sm"
+                            >
+                              <div *ngIf="arrivalHour?.errors?.['required']">
+                                arrivalHour required.
+                              </div>
+                            </div>
+                          </div>
                        </div>
 
-                       <!-- CHECKOUT  HOUR-->
-                       <div *ngIf="showArriveHour"class="my-2  w-full rounded-sm">
-                         <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                         <label for="address" class="mx-2 pb-2 font-semibold">CHECK OUT</label>
-                         <select
-                         id="arrivalHour"
-                         formControlName="arrivalHour"
-                         name="arrivalHour"
-                         class="border h-[50px] w-full px-4 outline-none rounded-md text-sm focus:border focus:border-custGreen1"
-                       >
-                       <option [ngValue]="null" disabled>RDV</option>
-
-                         <option
-                           *ngFor="let arrivalHour of arrivalHours"
-                           [ngValue]="arrivalHour"
-                         >
-                           {{ arrivalHour }}
-                         </option>
-                       </select>                          <div
-                           *ngIf="
-                             arrivalHour?.invalid &&
-                             (arrivalHour?.dirty || arrivalHour?.touched)
-                           "
-                           class="text-red-500 text-sm"
-                         >
-                           <div *ngIf="arrivalHour?.errors?.['required']">
-                            arrivalHour required.
-                           </div>
-                         </div>
-                       </div>
 
 
 
@@ -258,7 +269,8 @@
             <!-- !reservationForm.valid ? 'bg-gray-400' : 'bg-custGreen1' -->
             <button
             type="submit"
-            [disabled]="!reservationForm.valid"
+            (click)="scrollToElement(quoteDiv)"
+            [disabled]="!reservationForm.valid || showQuote"
             id="submitBtnId"
             class="w-full my-4 {{
                 !reservationForm.valid ? 'bg-gray-400' : 'bg-green-800/50'
@@ -268,7 +280,7 @@
                 Loading...
               </ng-container>
               <ng-container *ngIf="!isLoading">
-                RESERVE NOW
+                CONFIRM
               </ng-container>
 
             </button>
@@ -279,11 +291,13 @@
       </form>
     </div>
   </div>
-
-  <!-- <div *ngIf="isAddingOfferResult" class="loading-overlay flex justify-center items-center my-2uto mx-auto">
-    <div class="h-1/4">
-      <lottie-player  [src]="animationSrc"  background="transparent"  speed="1" loop  autoplay >
-      </lottie-player>
-    </div>
-  </div> -->
 </div>
+
+<div #quoteDiv >
+  <div *ngIf="showQuote" class="w-full">
+    <div [ngClass]="showQuote? 'opacity-100' : 'opacity-0'" class="transition-all ease-in-out duration-1000 delay-100">
+        <app-reservation-quote (showDetailedFormEmitter)="showDetailedForm($event)"></app-reservation-quote>
+    </div>
+  </div>
+</div>
+
