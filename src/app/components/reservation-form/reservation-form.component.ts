@@ -30,7 +30,6 @@ export class ReservationFormComponent implements OnInit {
   @Output() public showHourEvent = new EventEmitter();
   @Output() public toggleShowDetailedForm = new EventEmitter();
 
-  isSubmit:Boolean = false;
 
   selectUndefinedOptionValue:any;
 
@@ -41,50 +40,51 @@ export class ReservationFormComponent implements OnInit {
                  this.departureSites = response.data.data;
                  this.arrivalSites = response.data.data;
       });
+
+      this.reservationForm = new FormGroup({
+        departureSite : new FormControl(null, [
+          Validators.required,
+          ],
+        ),
+        departureMeetingPoint: new FormControl(null, [
+          // Validators.required
+        ]
+        ),
+        arrivalMeetingPoint: new FormControl(null,[
+          // Validators.required,
+          ],),
+        arrivalSite: new FormControl(null,[
+          Validators.required,
+          ],),
+        departureHour: new FormControl(null,[
+          Validators.required
+          ],),
+        departureDate: new FormControl(null,[
+          Validators.required
+          ],),
+        arrivalHour: new FormControl(null,[
+          Validators.required
+          ],),
+        arrivalDate: new FormControl(null,[
+          Validators.required
+          ],),
+        departureFlightNumber: new FormControl(null,[
+          ],),
+        arrivalFlightNumber: new FormControl(null,[
+          ],),
+      })
+
+      this.departMinDate = new Date().toLocaleDateString('pt-br').split( '/' ).reverse( ).join( '-' );
+      // console.log(" date ", this.departMinDate)
+
+
   }
 
   ngOnInit(): void {
-    this.reservationForm = new FormGroup({
-      departureSite : new FormControl(null, [
-        Validators.required,
-        ],
-      ),
-      departureMeetingPoint: new FormControl(null, [
-        // Validators.required
-      ]
-      ),
-      arrivalMeetingPoint: new FormControl(null,[
-        // Validators.required,
-        ],),
-      arrivalSite: new FormControl(null,[
-        Validators.required,
-        ],),
-      departureHour: new FormControl(null,[
-        Validators.required
-        ],),
-      departureDate: new FormControl(null,[
-        Validators.required
-        ],),
-      arrivalHour: new FormControl(null,[
-        Validators.required
-        ],),
-      arrivalDate: new FormControl(null,[
-        Validators.required
-        ],),
-      departureFlightNumber: new FormControl(null,[
-        ],),
-      arrivalFlightNumber: new FormControl(null,[
-        ],),
-    })
-
-    this.departMinDate = new Date().toLocaleDateString('pt-br').split( '/' ).reverse( ).join( '-' );
-    // console.log(" date ", this.departMinDate)
-
     this.reservationForm.valueChanges.subscribe(newFormState => {
       console.log(" form state ", newFormState)
       this.reservationService.reservFormSub.next(newFormState);
     })
-
   }
 
   onShowDetailedForm(event:any){
@@ -95,11 +95,11 @@ export class ReservationFormComponent implements OnInit {
       top: 0,
       left: 0,
       behavior: 'smooth'
-});
+    });
   }
 
   onDateOrSiteChange(){
-    console.log(" form ", this.reservationForm)
+    // console.log(" form ", this.reservationForm)
     if(!this.departureSite?.value || !this.departureDate?.value){
        return;
     }
@@ -128,7 +128,7 @@ export class ReservationFormComponent implements OnInit {
     //echo values of reserv
     this.reservationService.reservFormSub.next(this.reservationForm);
 
-    if(this.isSubmit){
+    if(this.showDetailedForm){
       this.onSubmit(event);
     } else {
       this.showQuote = true;

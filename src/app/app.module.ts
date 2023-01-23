@@ -26,6 +26,7 @@ import { LanguageDropDownComponent } from './components/layout/language-drop-dow
 import { LanguageInterceptor } from './interceptors/language.interceptor';
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import { ReservationQuoteComponent } from './components/reservation-quote/reservation-quote.component';
+import { DateSubstractorPipe } from './pipes/date-substractor.pipe';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -53,7 +54,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReviewsHomeComponent,
     GetInTouchComponent,
     LanguageDropDownComponent,
-    ReservationQuoteComponent
+    ReservationQuoteComponent,
+    DateSubstractorPipe
   ],
   imports: [
     BrowserModule,

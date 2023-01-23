@@ -1,15 +1,15 @@
 interface reservationRequest {
   departureSite: Number;
   departureMeetingPoint: Number;
-  departureDate: String;
-  arrivalDate: String;
+  departureDate: string;
+  arrivalDate: string;
   arrivalSite: Number;
   arrivalMeetingPoint: Number;
-  departureHour: String;
-  arrivalHour: String;
-  departureFlightNumber?: String;
-  arrivalFlightNumber?: String;
-  notes?: String;
+  departureHour: string;
+  arrivalHour: string;
+  departureFlightNumber?: string;
+  arrivalFlightNumber?: string;
+  notes?: string;
 }
 
 export { reservationRequest };

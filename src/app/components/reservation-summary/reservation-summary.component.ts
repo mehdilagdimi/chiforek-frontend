@@ -21,11 +21,9 @@ export class ReservationSummaryComponent implements OnInit {
   constructor(private reservService:ReservationService) {
     this.reservService.getReservFormSubAsObs().subscribe(val => {
       if(val){
-        console.log(" val ", val)
         this.reservationForm = val as reservationRequest;
-        console.log("depart ")
         // const {departureDate, ...rest} = this.reservationForm.value;
-        console.log("date of depart " + this.reservationForm.departureDate)
+        // console.log("date of depart " + this.reservationForm.departureDate)
         this.departDate = this.reservationForm.departureDate || "Date" ;
         this.arrivalDate = this.reservationForm.arrivalDate || "Date";
         this.departMeetingPoint = this.reservationForm.departureMeetingPoint || "Meeting Point";
