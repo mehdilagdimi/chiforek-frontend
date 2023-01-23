@@ -1,4 +1,4 @@
-import { ISite } from 'src/app/interfaces/ICity';
+import { ISite } from 'src/app/interfaces/ISite';
 import { ReservationService } from './../../services/reservation/reservation.service';
 import { formatDate } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
@@ -26,8 +26,10 @@ export class ReservationFormComponent implements OnInit {
   showDepartHour:boolean = false;
   showArriveHour:boolean = false;
   showQuote:boolean = false;
+  showDetailedForm:boolean = false;
   @Output() public showHourEvent = new EventEmitter();
   @Output() public toggleShowDetailedForm = new EventEmitter();
+
   isSubmit:Boolean = false;
 
   selectUndefinedOptionValue:any;
@@ -39,8 +41,6 @@ export class ReservationFormComponent implements OnInit {
                  this.departureSites = response.data.data;
                  this.arrivalSites = response.data.data;
       });
-
-
   }
 
   ngOnInit(): void {
@@ -50,11 +50,11 @@ export class ReservationFormComponent implements OnInit {
         ],
       ),
       departureMeetingPoint: new FormControl(null, [
-        Validators.required
+        // Validators.required
       ]
       ),
       arrivalMeetingPoint: new FormControl(null,[
-        Validators.required,
+        // Validators.required,
         ],),
       arrivalSite: new FormControl(null,[
         Validators.required,
@@ -71,21 +71,25 @@ export class ReservationFormComponent implements OnInit {
       arrivalDate: new FormControl(null,[
         Validators.required
         ],),
-      // departureFlightNumber: new FormControl(null,[
-      //   Validators.required
-      //   ],),
-      // arrivalFlightNumber: new FormControl(null,[
-      //   Validators.required
-      //   ],),
+      departureFlightNumber: new FormControl(null,[
+        ],),
+      arrivalFlightNumber: new FormControl(null,[
+        ],),
     })
 
     this.departMinDate = new Date().toLocaleDateString('pt-br').split( '/' ).reverse( ).join( '-' );
-    console.log(" date ", this.departMinDate)
+    // console.log(" date ", this.departMinDate)
+
+    this.reservationForm.valueChanges.subscribe(newFormState => {
+      console.log(" form state ", newFormState)
+      this.reservationService.reservFormSub.next(newFormState);
+    })
 
   }
 
-  showDetailedForm(event:any){
+  onShowDetailedForm(event:any){
     this.showQuote = false;
+    this.showDetailedForm = true;
     this.toggleShowDetailedForm.emit(event)
     window.scroll({
       top: 0,
@@ -121,18 +125,20 @@ export class ReservationFormComponent implements OnInit {
 
 
   onFormSubmit(event:any){
+    //echo values of reserv
+    this.reservationService.reservFormSub.next(this.reservationForm);
+
     if(this.isSubmit){
       this.onSubmit(event);
     } else {
       this.showQuote = true;
-
     }
 
 
   }
 
   onSubmit(event:any) {
-    console.log(" form ", this.reservationForm)
+    // console.log(" form ", this.reservationForm)
 
     this.isLoading = true;
     this.reservationService.saveReservation(this.reservationForm.value).subscribe(

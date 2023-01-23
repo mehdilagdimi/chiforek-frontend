@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { API_URL } from 'src/config/api.constants';
 import { Response } from 'src/app/interfaces/response';
 import { Observable } from 'rxjs/internal/Observable';
-import { ISite } from 'src/app/interfaces/ICity';
+import { ISite } from 'src/app/interfaces/ISite';
 
 
 @Injectable({

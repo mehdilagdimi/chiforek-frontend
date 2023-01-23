@@ -7,8 +7,8 @@ interface reservationRequest {
   arrivalMeetingPoint: Number;
   departureHour: String;
   arrivalHour: String;
-  departFlightNumber?: String;
-  arrivFlightNumber?: String;
+  departureFlightNumber?: String;
+  arrivalFlightNumber?: String;
   notes?: String;
 }
 

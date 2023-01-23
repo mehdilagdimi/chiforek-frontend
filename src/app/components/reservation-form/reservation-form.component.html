@@ -31,7 +31,7 @@
                 <option [ngValue]="null" disabled>Select depature site</option>
                 <option
                 *ngFor="let departureSite of departureSites"
-                [ngValue]="departureSite.id"
+                [ngValue]="departureSite.name"
                 >
                 {{ departureSite.name }}
               </option>
@@ -51,7 +51,7 @@
 
 
            <!-- Arrival -->
-              <div class="my-2  w-full rounded-sm">
+              <div *ngIf="showDetailedForm" class="my-2  w-full rounded-sm">
                 <!-- <div class="col-span-2 bg-red-200 "></div> -->
                 <label for="address" class="mx-2 pb-2 font-semibold">MEETING POINT</label>
                 <select
@@ -61,7 +61,7 @@
                   class="border h-[50px] w-full px-4 outline-none rounded-md text-sm focus:border focus:border-custGreen1"
                 >
                 <option [ngValue]="null" disabled>Select meeting point</option>
-                <option [ngValue]="1">Terminal 1</option>
+                <option value="Terminal 1">Terminal 1</option>
                   <option
                     *ngFor="let departureMeetingPoint of departureMeetingPoints"
                     [ngValue]="departureMeetingPoint"
@@ -134,11 +134,13 @@
                     </div>
                   </div>
               </div>
-              <!-- Departure Date -->
 
-
-
-
+              <!-- Flight number -->
+              <div *ngIf="showDetailedForm" class="mr-1 my-2 w-full rounded-sm">
+                  <!-- <div class="col-span-2 bg-red-200 "></div> -->
+                  <label for="address" class="mx-2 pb-2 font-semibold">Flight Number</label>
+                  <input type="text" placeholder="Enter Flight Number" formControlName="departureFlightNumber" name="departureFlightNumber"  class="border h-[50px] w-full rounded-md px-3 outline-none focus:border focus:border-custGreen1" />
+              </div>
 
 
 
@@ -178,7 +180,7 @@
                        </div>
 
 
-                       <div class="my-2  w-full rounded-sm">
+                       <div *ngIf="showDetailedForm" class="my-2  w-full rounded-sm">
                          <!-- <div class="col-span-2 bg-red-200 "></div> -->
                          <label for="address" class="mx-2 pb-2 font-semibold">MEETING POINT</label>
                          <select
@@ -188,7 +190,7 @@
                            class="border h-[50px] w-full px-4 outline-none rounded-md text-sm focus:border focus:border-custGreen1"
                          >
                          <option [ngValue]="null" disabled>Select meeting point</option>
-                         <option [ngValue]="1">Terminal 1</option>
+                         <option value="Terminal 1">Terminal 1</option>
 
                            <option
                              *ngFor="let arrivalMeetingPoint of arrivalMeetingPoints"
@@ -262,6 +264,13 @@
                           </div>
                        </div>
 
+                  <!-- Flight number -->
+                  <div *ngIf="showDetailedForm" class="mr-1 my-2 w-full rounded-sm">
+                      <!-- <div class="col-span-2 bg-red-200 "></div> -->
+                      <label for="address" class="mx-2 pb-2 font-semibold">Flight Number</label>
+                      <input type="text" placeholder="Enter Flight Number" formControlName="arrivalFlightNumber" name="arrivalFlightNumber"  class="border h-[50px] w-full rounded-md px-3 outline-none focus:border focus:border-custGreen1" />
+                  </div>
+
 
 
 
@@ -273,14 +282,15 @@
             [disabled]="!reservationForm.valid || showQuote"
             id="submitBtnId"
             class="w-full my-4 {{
-                !reservationForm.valid ? 'bg-gray-400' : 'bg-green-800/50'
-              }}  shadow-sm rounded-md py-3 text-white text-lg font-semibold"
+                !reservationForm.valid  || showQuote? 'bg-gray-400' : 'bg-green-800/50'
+                }}  shadow-sm rounded-md py-3 text-white text-lg font-semibold
+                {{showQuote ? 'cursor-not-allowed' :''}}"
             >
               <ng-container *ngIf="isLoading">
                 Loading...
               </ng-container>
               <ng-container *ngIf="!isLoading">
-                CONFIRM
+                {{ showDetailedForm === true ? "RESERVE NOW" : "CONFIRM" }}
               </ng-container>
 
             </button>
@@ -296,7 +306,7 @@
 <div #quoteDiv >
   <div *ngIf="showQuote" class="w-full">
     <div [ngClass]="showQuote? 'opacity-100' : 'opacity-0'" class="transition-all ease-in-out duration-1000 delay-100">
-        <app-reservation-quote (showDetailedFormEmitter)="showDetailedForm($event)"></app-reservation-quote>
+        <app-reservation-quote (showDetailedFormEmitter)="onShowDetailedForm($event)"></app-reservation-quote>
     </div>
   </div>
 </div>

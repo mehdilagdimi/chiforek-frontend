@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -5,12 +6,16 @@ import { Reservation } from 'src/app/interfaces/reservation';
 import { reservationRequest } from 'src/app/interfaces/reservationRequest';
 import { Response } from 'src/app/interfaces/response';
 import { API_URL } from 'src/config/api.constants';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
+  private parkPrice = new BehaviorSubject(29);
   private headers!:HttpHeaders;
+
+  reservFormSub = new BehaviorSubject({});
 
 
   constructor(private http: HttpClient) {
@@ -27,5 +32,14 @@ export class ReservationService {
             );
   }
 
+
+
+  getPriceSubAsObs(){
+    return this.parkPrice.asObservable();
+  }
+
+  getReservFormSubAsObs(){
+    return this.reservFormSub.asObservable();
+  }
 
 }
