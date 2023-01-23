@@ -139,7 +139,6 @@ export class ReservationFormComponent implements OnInit {
 
   onSubmit(event:any) {
     // console.log(" form ", this.reservationForm)
-
     this.isLoading = true;
     this.reservationService.saveReservation(this.reservationForm.value).subscribe(
       {

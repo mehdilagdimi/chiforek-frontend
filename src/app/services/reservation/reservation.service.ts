@@ -6,7 +6,6 @@ import { Reservation } from 'src/app/interfaces/reservation';
 import { reservationRequest } from 'src/app/interfaces/reservationRequest';
 import { Response } from 'src/app/interfaces/response';
 import { API_URL } from 'src/config/api.constants';
-import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +30,6 @@ export class ReservationService {
             `${API_URL}/reservations/add`, reservation, {headers : this.headers}
             );
   }
-
 
 
   getPriceSubAsObs(){

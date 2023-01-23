@@ -31,7 +31,7 @@
                 <option [ngValue]="null" disabled>Select depature site</option>
                 <option
                 *ngFor="let departureSite of departureSites"
-                [ngValue]="departureSite.name"
+                [ngValue]="departureSite.id"
                 >
                 {{ departureSite.name }}
               </option>
@@ -61,7 +61,7 @@
                   class="border h-[50px] w-full px-4 outline-none rounded-md text-sm focus:border focus:border-custGreen1"
                 >
                 <option [ngValue]="null" disabled>Select meeting point</option>
-                <option value="Terminal 1">Terminal 1</option>
+                <option value=1>Terminal 1</option>
                   <option
                     *ngFor="let departureMeetingPoint of departureMeetingPoints"
                     [ngValue]="departureMeetingPoint"
@@ -161,7 +161,7 @@
 
                            <option
                              *ngFor="let arrivalSite of arrivalSites"
-                             [ngValue]="arrivalSite.name"
+                             [ngValue]="arrivalSite.id"
                            >
                              {{ arrivalSite.name }}
                            </option>
@@ -190,8 +190,7 @@
                            class="border h-[50px] w-full px-4 outline-none rounded-md text-sm focus:border focus:border-custGreen1"
                          >
                          <option [ngValue]="null" disabled>Select meeting point</option>
-                         <option value="Terminal 1">Terminal 1</option>
-
+                         <option value=1>Terminal 1</option>
                            <option
                              *ngFor="let arrivalMeetingPoint of arrivalMeetingPoints"
                              [ngValue]="arrivalMeetingPoint"

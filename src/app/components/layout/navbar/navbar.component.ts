@@ -15,7 +15,10 @@ export class NavbarComponent implements OnInit {
   loginPath:string = "/login"
   isAuthenticated!:boolean;
 
-  constructor(private router:Router, private authService:AuthService, private jwtService:JwtHandlerService) { }
+  constructor(private router:Router, private authService:AuthService, private jwtService:JwtHandlerService) {
+    this.authService.getAuthState().subscribe((newState) => this.isAuthenticated = newState)
+
+  }
 
 
   ngOnInit(): void {
