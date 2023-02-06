@@ -3,9 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Reservation } from 'src/app/interfaces/reservation';
-import { reservationRequest } from 'src/app/interfaces/reservationRequest';
 import { Response } from 'src/app/interfaces/response';
 import { API_URL } from 'src/config/api.constants';
+import { reservationRequest } from 'src/app/interfaces/reservationRequest';
 
 @Injectable({
   providedIn: 'root'

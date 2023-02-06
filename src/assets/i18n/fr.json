@@ -1,4 +1,14 @@
 
 {
-  "login":"S'identifier"
+  "login":"S'identifier",
+  "logo":"assets/logo-fr.png",
+  "who-we-are-title": "Qui sommes nous?",
+  "who-we-are-content": "Nous sommes fiers d'offrir une nouvelle façon de voyager qui fait gagner du temps, notre service offre confort et commodité et vous donne plus de flexibilité. Confier votre véhicule à l'un de nos voituriers (service 24h/24) vous permet de gagner du temps au départ et à l'arrivée et vous simplifie la vie lors de vos déplacements à moindre prix.",
+  "mission-title":"Notre mission",
+  "mission-content":"Notre service voiturier vous permet d'arriver à l'aéroport de YUL sans stress. Nos sympathiques voituriers récupèrent votre véhicule directement au point de chute et vous le restituent lors d'un aller-retour. Tout cela se fait avec le sourire. Notre service vous permet de faire des économies afin de mieux profiter de vos vacances/déplacements.",
+  "How-does-it-work-title":"Comment ca marche?",
+  "How-does-it-work-content":"Notre service de voiturier est conçu pour rendre votre voyage aussi confortable et serein que possible. Notre personnel vous rencontrera dans la zone initiale débarcadère de l'aéroport , et conduira personnellement votre véhicule jusqu'à sa destination finale dans nos installations sécurisées . Le superviseur voiturier est également là pour vous accueillir à votre arrivée et s'assurer que votre véhicule est prêt pour vous. Cela permet d'économiser du temps et de l'argent, alors pourquoi ne pas en profiter dès aujourd'hui?",
+  "advantages": "Avantages NEOvalet",
+  "rapiditéservice":"assets/rapiditéservice.png"
+
 }

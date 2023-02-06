@@ -2,19 +2,19 @@
   <div class="container mx-auto">
     <div class="-mx-4 flex justify-around flex-wrap">
       <div class="w-full px-4 sm:w-2/3 lg:w-3/12">
-        <div class="mb-10 w-full">
-          <a href="javascript:void(0)" class="mb-6 inline-block max-w-[160px]">
+        <div class="w-full my-auto">
+          <a href="javascript:void(0)" class="inline-block w-full">
             <img
-              src="assets/logo.png"
+              src="{{'logo' | translate }}"
               alt="logo"
-              class="max-w-full"
+              class="h-80 w-full object-cover"
             />
           </a>
-          <p class="text-body-color mb-7 text-base">
+          <!-- <p class="text-body-color mb-7 text-base">
             Sed ut perspiciatis undmnis is iste natus error sit amet voluptatem
             totam rem aperiam.
-          </p>
-          <p class="text-dark inline-block text-center w-full text-md font-semibold">
+          </p> -->
+          <!-- <p class="text-dark inline-block text-center w-full text-md font-semibold">
             <span class="text-primary text-center inline-block mr-3">
               <svg
                 width="19"
@@ -34,12 +34,13 @@
               </svg>
             </span>
             <span>+012 (345) 678 99</span>
-          </p>
+          </p> -->
         </div>
       </div>
 
-
-      <app-new-letter></app-new-letter>
+      <div class="my-auto">
+        <app-new-letter></app-new-letter>
+      </div>
 
     </div>
   </div>

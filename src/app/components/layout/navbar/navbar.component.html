@@ -1,8 +1,8 @@
 <ng-container *ngIf="!hasRoute('/login') && !hasRoute('/signup')">
 
-  <div class="z-[999] fixed h-20 top-0 w-full left-0 grid grid-cols-8 bg-gray-100/20 shadow-md">
+  <div class="z-[999] fixed h-24 top-0 w-full left-0 grid grid-cols-8 bg-gray-100/20 backdrop-blur-sm shadow-md">
     <div class="col-start-2 col-end-3 p-2 my-auto mx-auto">
-      <img class="h-10 cursor-pointer" src="assets/logo.png" alt="logomyRH" (click)="navigateToHome()">
+      <img class="h-24 cursor-pointer" src="{{'logo' | translate }}" alt="logomyNEOvalet" (click)="navigateToHome()">
     </div>
     <div class="col-start-7 col-end-8 my-auto mx-auto">
 
@@ -10,16 +10,17 @@
         <div  class="flex items-center">
           <a *ngIf="!isAuthenticated" routerLink="/login" class="px-4 py-1 rounded-full hover:border hover:border-1 cursor-pointer font-semibold">
             {{'login' | translate }}?
+            
           </a>
           <a class="">
             <app-language-drop-down></app-language-drop-down>
           </a>
-          <div *ngIf="isAuthenticated" class="w-20">
+          <ng-container *ngIf="isAuthenticated" class="w-20">
             <button class="inline-flex justify-center mx-4 px-2 py-2 rounded-full text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white hover:border hover:border-custPurple  hover:text-custGreen1 focus:outline-none focus:border-custPurple focus:shadow-outline-blue active:bg-custPurple active:text-white"
             type="button" aria-haspopup="true" aria-expanded="true" aria-controls="headlessui-menu-items-117">
                 <img class="h-8" src="assets/profile.png" alt="profileicon" >
             </button>
-          </div>
+          </ng-container>
         </div>
 
 
