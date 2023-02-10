@@ -13,7 +13,7 @@ export class JwtHandlerService {
     }
 
     setToken(token: string) {
-      if (token) {
+      if (token != '') {
         this.jwtToken = token;
       }
     }
