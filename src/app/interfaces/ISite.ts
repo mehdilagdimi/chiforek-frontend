@@ -1,9 +1,9 @@
 interface ISite {
-      id:Number,
+      id?:Number,
       name: String;
-      rate: Number;
-      addedPrice: Number;
-      isEnabled: Boolean;
+      rate?: Number;
+      addedPrice?: Number;
+      isEnabled?: Boolean;
 
 }
 

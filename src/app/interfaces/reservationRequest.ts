@@ -1,3 +1,4 @@
+import { ISite } from 'src/app/interfaces/ISite';
 interface reservationRequest {
   departureSite: Number;
   departureMeetingPoint: Number;

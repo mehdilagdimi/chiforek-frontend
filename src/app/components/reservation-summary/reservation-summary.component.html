@@ -16,13 +16,14 @@
           <span class="text-lg">
             <i class="fa-solid fa-location-dot"></i>
           </span>
-          {{departSite}}, {{departMeetingPoint}}</p>
+          {{departSite?.name}}, {{departMeetingPoint}}</p>
 
         <p>
           <span class="text-lg">
           <i class="fa-solid fa-calendar"></i>
           </span>
-          {{departDate}}</p>
+          {{departDate}}, {{checkin}}
+        </p>
       </div>
     </div>
     <div class="my-2">
@@ -37,18 +38,19 @@
           <span class="text-lg">
             <i class="fa-solid fa-location-dot"></i>
           </span>
-          {{arrivalSite}}, {{arrivalMeetingPoint}}</p>
+          {{arrivalSite?.name}}, {{arrivalMeetingPoint}}</p>
 
         <p>
           <span class="text-lg">
             <i class="fa-solid fa-calendar"></i>
           </span>
-          {{arrivalDate}}</p>
+          {{arrivalDate}},  {{checkout}}
+        </p>
       </div>
     </div>
   </div>
 
-  <div class="bg-gray-50 border-4 border-gray-400 px-4 text-md flex justify-around items-center rounded-xl h-20">
+  <div class="bg-gray-50 border border-gray-400 px-4 text-md flex justify-around items-center rounded-xl h-20">
     <!-- <p class="py-2 mx-1 text-lg">Total</p> -->
     <span class="text-3xl">
       <i class="fa-solid fa-money-check-dollar"></i>

@@ -2,6 +2,7 @@ import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
+import {MatSelectModule} from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +28,7 @@ import { LanguageInterceptor } from './interceptors/language.interceptor';
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import { ReservationQuoteComponent } from './components/reservation-quote/reservation-quote.component';
 import { DateSubstractorPipe } from './pipes/date-substractor.pipe';
+import { FormLoginComponent } from './components/layout/form-login/form-login.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -55,7 +57,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     GetInTouchComponent,
     LanguageDropDownComponent,
     ReservationQuoteComponent,
-    DateSubstractorPipe
+    DateSubstractorPipe,
+    FormLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +67,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatSelectModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

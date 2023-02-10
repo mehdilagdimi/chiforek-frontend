@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class LanguageDropDownComponent implements OnInit {
   lang!:string;
+  isShowLang = false;
   constructor(private localStorageService:LocalStorageService, private translateService:TranslateService) { }
 
   ngOnInit(): void {
@@ -16,10 +17,17 @@ export class LanguageDropDownComponent implements OnInit {
   }
 
 
-  onLangChange(event:any){
-    console.log(" event ", event.target.value)
-    this.localStorageService.set("lang", event.target.value);
+  onLangChange(value:any){
+    // console.log(" event ", event.target.value)
+    this.localStorageService.set("lang", value);
     window.location.reload();
   }
+
+  showLangMenu(){
+    console.log("inside show lang")
+    this.isShowLang = !this.isShowLang;
+    console.log("show ", this.isShowLang)
+  }
+
 
 }

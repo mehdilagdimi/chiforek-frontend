@@ -5,6 +5,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SiteService } from 'src/app/services/reservation/site.service';
+import { reservationRequest } from 'src/app/interfaces/reservationRequest';
 
 @Component({
   selector: 'app-reservation-form',
@@ -38,6 +39,7 @@ export class ReservationFormComponent implements OnInit {
     this.siteService.getSites().subscribe(
       response => {
                  this.departureSites = response.data.data;
+                 this.reservationService.updateDepartSitesState(this.departureSites);
                  this.arrivalSites = response.data.data;
       });
 
@@ -126,10 +128,12 @@ export class ReservationFormComponent implements OnInit {
 
   onFormSubmit(event:any){
     //echo values of reserv
-    this.reservationService.reservFormSub.next(this.reservationForm);
+    // this.reservationService.reservFormSub.next(this.reservationForm);
 
     if(this.showDetailedForm){
       this.onSubmit(event);
+      console.log(" after submission ", event)
+
     } else {
       this.showQuote = true;
     }

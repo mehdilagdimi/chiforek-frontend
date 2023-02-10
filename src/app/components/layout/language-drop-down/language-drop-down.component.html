@@ -1,4 +1,30 @@
-<select class="rounded-md border px-2 py-1 outline-none" (change)="onLangChange($event)">
-  <option value="fr" [selected]="lang == 'fr'">French</option>
-  <option value="en" [selected]="lang == 'en'">English</option>
-</select>
+<div class="dropdown w-[100px]">
+  <button (click)="showLangMenu()" class="dropbtn hover:bg-gray-100">
+    <img class="h-6 w-full" src="assets/{{lang}}.svg"  alt="fr"/>
+  </button>
+  <ng-container *ngIf="isShowLang">
+    <div *ngIf="isShowLang ? 'flex justify-center items-center' : 'hidden'" class="dropdown-content z-[999] p-1 w-10">
+        <div class="">
+          <img (click)="onLangChange('fr')" class="cursor-pointer w-full my-1 " src="assets/fr.svg" alt="fr"/>
+        </div>
+        <div class="">
+          <img (click)="onLangChange('en')" class="cursor-pointer w-full my-1 h-12" src="assets/en.svg"  alt="eng"/>
+        </div>
+    </div>
+  </ng-container>
+</div>
+
+<!--
+<div class="my-4 z-[999] text-black">
+  <mat-form-field appearance="fill" class="bg-gray-100 w-20 text-black">
+    <mat-label>Lang    </mat-label>
+    <mat-select value="fr">
+      <mat-option value="fr" selected>
+          <img class="h-10" src="assets/fr.svg"  alt="fr"/>
+      </mat-option>
+      <mat-option value="en">
+          <img class="h-12" src="assets/uk.svg"  alt="fr"/>
+      </mat-option>
+    </mat-select>
+    </mat-form-field>
+</div> -->

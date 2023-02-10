@@ -1,3 +1,4 @@
+import { ISite } from 'src/app/interfaces/ISite';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -13,6 +14,10 @@ import { reservationRequest } from 'src/app/interfaces/reservationRequest';
 export class ReservationService {
   private parkPrice = new BehaviorSubject(29);
   private headers!:HttpHeaders;
+  private departSites = new BehaviorSubject([]);
+  // private arrivalSites :ISite[] = [];
+  private departMeetings= new BehaviorSubject([]);
+  // private arrivalMeetings:any = [];
 
   reservFormSub = new BehaviorSubject({});
 
@@ -39,5 +44,35 @@ export class ReservationService {
   getReservFormSubAsObs(){
     return this.reservFormSub.asObservable();
   }
+
+
+  setDepartSites(sites:any){
+    this.departSites = sites;
+  }
+
+  getDepartSitesAsObs(){
+    return this.departSites.asObservable();
+  }
+
+  getDepartMeetingsAsObs(){
+    return this.departMeetings.asObservable();
+  }
+
+  updateDepartSitesState(val:any){
+    this.departSites.next(val);
+  }
+
+  updateDepartMeetingsState(val:any){
+    this.departMeetings.next(val);
+  }
+  // setArrivalSites(sites:any){
+  //   this.arrivalSites = sites;
+  // }
+  setArrivalMeetings(meeting:any){
+    this.departMeetings = meeting;
+  }
+  // setDepartMeetings(meeting:any){
+  //   this.arrivalMeetings = meeting;
+  // }
 
 }
