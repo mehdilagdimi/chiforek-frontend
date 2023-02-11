@@ -27,7 +27,7 @@ export class ReservationFormComponent implements OnInit {
   showDepartHour:boolean = false;
   showArriveHour:boolean = false;
   showQuote:boolean = false;
-  showDetailedForm:boolean = false;
+  showDetailedForm:boolean = true;
   @Output() public showHourEvent = new EventEmitter();
   @Output() public toggleShowDetailedForm = new EventEmitter();
 
