@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.userEmail = this.jwtService.getEmail()!;
+    this.userEmail = this.jwtService.getEmail()!;
     // this.userRole = this.jwtService.getRole()!;
     // if(this.userRole == "ROLE_EMPLOYER") this.dashboard = "/employer";
     // else if(this.userRole == "ROLE_AGENT") this.dashboard = "/agent";

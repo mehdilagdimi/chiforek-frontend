@@ -274,8 +274,11 @@
 
 
 
+
+
             <!-- !reservationForm.valid ? 'bg-gray-400' : 'bg-custGreen1' -->
             <button
+            *ngIf="!showDetailedForm"
             type="submit"
             (click)="scrollToElement(quoteDiv)"
             [disabled]="!reservationForm.valid || showQuote"
@@ -289,7 +292,7 @@
                 Loading...
               </ng-container>
               <ng-container *ngIf="!isLoading">
-                {{ showDetailedForm === true ? "RESERVE NOW" : "CONFIRM" }}
+                 CONFIRM
               </ng-container>
 
             </button>
@@ -309,4 +312,24 @@
     </div>
   </div>
 </div>
+
+
+<ng-container *ngIf="showDetailedForm">
+  <div class="py-4 my-4 mx-3">
+    <div class="h-12 bg-custGray/30 flex justify-center items-center rounded-t-lg font-semibold">
+      Additional Services
+    </div>
+    <app-form-services></app-form-services>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="showDetailedForm">
+  <div class="py-4 my-4 mx-3 ">
+    <div class="h-12 bg-custGray/30 flex justify-center items-center rounded-t-lg font-semibold">
+      Your information
+    </div>
+    <app-form-login></app-form-login>
+  </div>
+</ng-container>
+
 

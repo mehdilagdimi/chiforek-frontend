@@ -29,6 +29,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import { ReservationQuoteComponent } from './components/reservation-quote/reservation-quote.component';
 import { DateSubstractorPipe } from './pipes/date-substractor.pipe';
 import { FormLoginComponent } from './components/layout/form-login/form-login.component';
+import { FormServicesComponent } from './components/layout/form-services/form-services.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -58,7 +59,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LanguageDropDownComponent,
     ReservationQuoteComponent,
     DateSubstractorPipe,
-    FormLoginComponent
+    FormLoginComponent,
+    FormServicesComponent
   ],
   imports: [
     BrowserModule,
