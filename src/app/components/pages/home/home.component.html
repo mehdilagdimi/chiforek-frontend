@@ -15,6 +15,7 @@
 
     <div  [ngClass]="showForm? 'justify-center' :'justify-end'" class="w-[1400px] flex z-0 mt-12 mb-20">
       <div [ngClass]="showForm? 'w-3/5':'w-4/5'" class="flex flex-col  h-fit relative ">
+        <app-multi-step-bar class="sticky top-24 " *ngIf="showForm"></app-multi-step-bar>
         <app-reservation-form (toggleShowDetailedForm)="showForm = true" (showHourEvent)="showTransition = $event" ></app-reservation-form>
       </div>
 
@@ -28,7 +29,6 @@
 
     </div>
 
-    <!-- <a href="https://storyset.com/people">People illustrations by Storyset</a> -->
   </div>
   </div>
 

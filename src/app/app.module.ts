@@ -2,7 +2,7 @@ import { AppHttpInterceptor } from './interceptors/app-http.interceptor';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,11 +25,12 @@ import { ReviewsHomeComponent } from './components/layout/reviews-home/reviews-h
 import { GetInTouchComponent } from './components/layout/get-in-touch/get-in-touch.component';
 import { LanguageDropDownComponent } from './components/layout/language-drop-down/language-drop-down.component';
 import { LanguageInterceptor } from './interceptors/language.interceptor';
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { ReservationQuoteComponent } from './components/reservation-quote/reservation-quote.component';
 import { DateSubstractorPipe } from './pipes/date-substractor.pipe';
 import { FormLoginComponent } from './components/layout/form-login/form-login.component';
 import { FormServicesComponent } from './components/layout/form-services/form-services.component';
+import { MultiStepBarComponent } from './components/layout/multi-step-bar/multi-step-bar.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -60,8 +61,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReservationQuoteComponent,
     DateSubstractorPipe,
     FormLoginComponent,
-    FormServicesComponent
-  ],
+    FormServicesComponent,
+    MultiStepBarComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
