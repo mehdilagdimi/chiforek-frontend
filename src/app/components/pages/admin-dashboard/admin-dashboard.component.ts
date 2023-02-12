@@ -1,4 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import { API_URL } from 'src/config/api.constants';
+import {DashboardService} from "../../../services/dashboard/dashboard.service";
+
+type Response = {
+  "date": string,
+  "data": object,
+  "status": number,
+  "responseStatus": string,
+  "message":string
+}
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -7,228 +18,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  data: Array<Object> = [
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha1"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha2"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha3"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha4"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha1"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha2"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha3"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha4"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha1"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha2"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha3"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha4"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha1"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha2"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha3"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha4"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha1"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha2"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha3"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha4"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha1"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha2"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha3"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha4"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha1"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha2"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha3"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha4"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha1"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha2"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha3"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha4"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha1"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha2"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha3"
-    },
-    {
-      name: "bla bla",
-      description: "tza tza",
-      profile: "k3a k3a",
-      taha: "taha4"
-    }
-  ]
-  constructor() { }
+  current: string = 'reservations'
+  constructor(private httpClient: HttpClient,
+              private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
   }
 
+  setCurrent(value: string){
+    this.current = value
+    this.httpClient.get(`${API_URL}/${value}`).subscribe({
+      next: (response:any) => {
+        this.dashboardService.dataChange.next(response.data.data)
+        console.log(this.dashboardService.data)
+      }
+    })
+  }
 
 }
