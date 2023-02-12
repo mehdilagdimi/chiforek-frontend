@@ -11,7 +11,7 @@
           </tr>
           </thead >
           <tbody>
-          <tr *ngFor="let row of readyData" class="bg-white border-b">
+          <tr *ngFor="let row of getPage(currentPage)" class="bg-white border-b">
             <td *ngFor="let record of row" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
               {{ record }}
             </td>
@@ -22,3 +22,18 @@
     </div>
   </div>
 </div>
+<nav aria-label="Page navigation">
+  <ul class="inline-flex">
+    <li><button class="border border-custGray h-10 px-5 text-indigo-600 transition-colors duration-150 bg-white rounded-l-lg focus:shadow-outline hover:bg-custGray/60">Prev</button></li>
+    <!-- doforeach -->
+      <li *ngFor="let r of [].constructor(totalOfPages); let i = index"><a (click)="setCurrentPage(i+1)" [ngClass]="{'text-white bg-custGray hover:bg-custGray': currentPage == i+1}" class="border border-custGray flex items-center h-10 px-5 align-middle cursor-pointer transition-colors duration-150 bg-white focus:shadow-outline hover:bg-custGray/60 ">{{i+1}}</a></li>
+    <!-- endforeach -->
+    <li><button class="border border-custGray h-10 px-5 text-indigo-600 transition-colors duration-150 bg-white rounded-r-lg focus:shadow-outline hover:bg-custGray/60">Next</button></li>
+  </ul>
+</nav>
+
+<!--
+<c:if test="${currentPage != i}"><c:out value="text-indigo-600" /> </c:if>
+<c:if test="${currentPage == i}"><c:out value="text-white bg-blue-800 hover:bg-blue-800" />
+</c:if>" ><c:out value="${ i }" />
+-->

@@ -8,6 +8,10 @@ import {Component, Input, OnInit} from '@angular/core';
 export class DashboardComponent implements OnInit {
 
   @Input() data: Array<Object> = []
+  @Input() elementPerPage: number = 2
+  currentPage: number = 1
+  totalOfPages: number = 1
+
 
   readyData:Array<Array<string>> = []
   keys:Array<string> = []
@@ -17,17 +21,29 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.setupKeys()
     this.setupValues()
-    console.log(this.readyData)
+    this.totalOfPages = this.readyData.length / this.elementPerPage
+    console.log(this.readyData, this.totalOfPages)
   }
 
-  setupKeys(): void{
+  private setupKeys(): void{
     this.keys = Object.keys(this.data[0])
   }
 
-  setupValues(): void{
+  private setupValues(): void{
     this.data.forEach((object) => {
       let values = Object.values(object)
       this.readyData.push(values)
     })
   }
+
+  getPage(pageNumber: number): Array<Array<string>>{
+    let offset = (pageNumber-1) * this.elementPerPage
+    let max = offset + this.elementPerPage
+    return this.readyData.slice(offset, max)
+  }
+
+  setCurrentPage(number: number): void {
+    this.currentPage = number
+  }
+
 }
