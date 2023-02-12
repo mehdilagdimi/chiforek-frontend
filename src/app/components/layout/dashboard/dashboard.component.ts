@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.setupKeys()
     this.setupValues()
-    this.totalOfPages = this.readyData.length / this.elementPerPage
+    this.totalOfPages = Math.ceil(this.readyData.length / this.elementPerPage)
     console.log(this.readyData, this.totalOfPages)
   }
 
