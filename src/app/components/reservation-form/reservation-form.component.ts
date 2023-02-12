@@ -159,8 +159,7 @@ export class ReservationFormComponent implements OnInit {
        form: this.reservationForm.value,
        services: this.selectedServices
     }
-    // console.log(" selected servoces after form subm ", this.completedReservation)
-    // return;
+
     this.isLoading = true;
     this.reservationService.saveReservation(this.completedReservation).subscribe(
       {
@@ -180,10 +179,14 @@ export class ReservationFormComponent implements OnInit {
 
   onSuccess(){
     this.isSuccess = true;
+    this.router.navigateByUrl('/home').then(() => {
+      window.location.reload();
+    })
   }
 
   onError(){
     this.isSuccess = false;
+    alert("Mercie de sélectionner un point de ")
   }
 
 
