@@ -31,6 +31,8 @@ import { DateSubstractorPipe } from './pipes/date-substractor.pipe';
 import { FormLoginComponent } from './components/layout/form-login/form-login.component';
 import { FormServicesComponent } from './components/layout/form-services/form-services.component';
 import { MultiStepBarComponent } from './components/layout/multi-step-bar/multi-step-bar.component';
+import { AdminDashboardComponent } from './components/pages/admin-dashboard/admin-dashboard.component';
+import { DashboardComponent } from './components/layout/dashboard/dashboard.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -62,7 +64,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     DateSubstractorPipe,
     FormLoginComponent,
     FormServicesComponent,
-    MultiStepBarComponent
+    MultiStepBarComponent,
+    AdminDashboardComponent,
+    DashboardComponent
     ],
   imports: [
     BrowserModule,
@@ -88,4 +92,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

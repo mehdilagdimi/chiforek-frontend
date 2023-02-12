@@ -31,6 +31,7 @@
     "path": "^0.12.7",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
+    "tw-elements": "^1.0.0-alpha13",
     "typescript": "~4.7.2",
     "zone.js": "~0.11.4"
   },

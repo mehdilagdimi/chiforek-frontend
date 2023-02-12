@@ -7,7 +7,7 @@ import {ReservationService} from "../../../services/reservation/reservation.serv
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  showForm:Boolean = true;
+  showForm:Boolean = false;
   showTransition:Boolean = false;
   sections: Array<HTMLElement> = []
 
@@ -25,14 +25,14 @@ export class HomeComponent implements OnInit {
 
   @HostListener("window:scroll", [])
   onWindowScroll() {
-    let steps:Array<HTMLElement> = []
+    if(!this.showForm){return}
+      let steps:Array<HTMLElement> = []
     let service = this.elementRef.nativeElement.querySelector('#service')
     let order = this.elementRef.nativeElement.querySelector('#order')
     let signin = this.elementRef.nativeElement.querySelector('#signin')
     steps.push(<HTMLElement>order,<HTMLElement>service,<HTMLElement>signin)
 
     steps.forEach((step: HTMLElement) => {
-
       if(window.scrollY >= step.offsetTop ) {
         console.log(this.reservationService.current)
         this.reservationService.current = step.getAttribute('id') ?? 'order'
