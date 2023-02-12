@@ -179,7 +179,12 @@ export class ReservationFormComponent implements OnInit {
 
   onSuccess(){
     this.isSuccess = true;
-    this.router.navigateByUrl('/home').then(() => {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+    this.router.navigate(['/home']).then(() => {
       window.location.reload();
     })
   }
