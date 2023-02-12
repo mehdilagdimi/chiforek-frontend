@@ -333,3 +333,27 @@
 </ng-container>
 
 
+<ng-container *ngIf="showDetailedForm">
+  <div class="flex justify-center">
+    <button
+    type="submit"
+    (click)="onFormSubmit($event)"
+    [disabled]="!reservationForm.valid || showQuote || !isAuthenticated"
+    id="submitBtnId"
+    class="w-1/5 my-4 {{
+        !reservationForm.valid  || showQuote || !isAuthenticated? 'bg-gray-400' : 'bg-green-800/50'
+        }}  shadow-sm rounded-md py-3 text-white text-lg font-semibold
+        {{showQuote ? 'cursor-not-allowed' :''}}"
+    >
+      <ng-container *ngIf="isLoading">
+        Loading...
+      </ng-container>
+      <ng-container *ngIf="!isLoading">
+         RESERVE
+      </ng-container>
+
+    </button>
+  </div>
+</ng-container>
+
+

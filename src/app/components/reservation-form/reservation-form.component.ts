@@ -6,6 +6,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SiteService } from 'src/app/services/reservation/site.service';
 import { reservationRequest } from 'src/app/interfaces/reservationRequest';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { ParkService } from 'src/app/interfaces/ParkService';
 
 @Component({
   selector: 'app-reservation-form',
@@ -14,6 +16,11 @@ import { reservationRequest } from 'src/app/interfaces/reservationRequest';
 })
 export class ReservationFormComponent implements OnInit {
   reservationForm!:FormGroup;
+  completedReservation!: {
+    form:reservationRequest,
+    services: ParkService[]
+  };
+
   departMinDate!:any;
   departureSites:ISite[] = [];
   arrivalSites:ISite[] = [];
@@ -22,19 +29,26 @@ export class ReservationFormComponent implements OnInit {
   departureMeetingPoints:any[] = [];
   arrivalMeetingPoints:any[] = [];
   selectedSite!:string;
+  selectedServices:ParkService[] = [];
+  isAuthenticated:boolean = false;
   isLoading:boolean = false;
   isSuccess!:boolean;
   showDepartHour:boolean = false;
   showArriveHour:boolean = false;
   showQuote:boolean = false;
-  showDetailedForm:boolean = true;
+  showDetailedForm:boolean = false;
   @Output() public showHourEvent = new EventEmitter();
   @Output() public toggleShowDetailedForm = new EventEmitter();
 
 
   selectUndefinedOptionValue:any;
 
-  constructor(private reservationService:ReservationService, private siteService:SiteService, private router:Router) {
+  constructor(private reservationService:ReservationService, private authService:AuthService, private siteService:SiteService, private router:Router) {
+
+    this.authService.getAuthState().subscribe((newState) => {
+      this.isAuthenticated = newState
+    })
+
     // get sites
     this.siteService.getSites().subscribe(
       response => {
@@ -78,14 +92,16 @@ export class ReservationFormComponent implements OnInit {
 
       this.departMinDate = new Date().toLocaleDateString('pt-br').split( '/' ).reverse( ).join( '-' );
       // console.log(" date ", this.departMinDate)
-
-
   }
 
   ngOnInit(): void {
     this.reservationForm.valueChanges.subscribe(newFormState => {
       console.log(" form state ", newFormState)
       this.reservationService.reservFormSub.next(newFormState);
+    })
+
+    this.reservationService.getSelectedServicesSubjAsObs().subscribe((val) => {
+        this.selectedServices = val as ParkService[];
     })
   }
 
@@ -129,22 +145,24 @@ export class ReservationFormComponent implements OnInit {
   onFormSubmit(event:any){
     //echo values of reserv
     // this.reservationService.reservFormSub.next(this.reservationForm);
-
     if(this.showDetailedForm){
       this.onSubmit(event);
-      console.log(" after submission ", event)
-
+      // console.log(" after submission ", event)
     } else {
       this.showQuote = true;
     }
-
-
   }
 
   onSubmit(event:any) {
     // console.log(" form ", this.reservationForm)
+    this.completedReservation = {
+       form: this.reservationForm.value,
+       services: this.selectedServices
+    }
+    // console.log(" selected servoces after form subm ", this.completedReservation)
+    // return;
     this.isLoading = true;
-    this.reservationService.saveReservation(this.reservationForm.value).subscribe(
+    this.reservationService.saveReservation(this.completedReservation).subscribe(
       {
         next: (resp:any) => {
           console.log("data ", resp );

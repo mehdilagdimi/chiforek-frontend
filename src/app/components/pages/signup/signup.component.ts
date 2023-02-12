@@ -40,7 +40,7 @@ export class SignupComponent implements OnInit {
       tele: new FormControl('',[
         Validators.required
         ],),
-      toSubscribe: new FormControl('',[
+      toSubscribe: new FormControl(true,[
 
         ],),
 
