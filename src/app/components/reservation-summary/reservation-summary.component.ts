@@ -28,7 +28,6 @@ export class ReservationSummaryComponent implements OnInit {
     this.reservService.getDepartSitesAsObs().subscribe(
       (val) => {
         this.allSites = val
-        console.log(" sito ", this.allSites)
       }
     );
     this.reservService.getDepartMeetingsAsObs().subscribe(
@@ -49,8 +48,8 @@ export class ReservationSummaryComponent implements OnInit {
         this.checkin = this.reservationForm.departureHour || "Checkin" ;
         this.arrivalDate = this.reservationForm.arrivalDate || "Date";
         this.checkout = this.reservationForm.arrivalHour || "Checkout" ;
-        this.departMeetingPoint = this.reservationForm.departureMeetingPoint || "Meeting Point?n";
-        this.arrivalMeetingPoint = this.reservationForm.arrivalMeetingPoint || "Meeting Point?n";
+        this.departMeetingPoint = this.reservationForm.departureMeetingPoint || "Meeting Point?";
+        this.arrivalMeetingPoint = this.reservationForm.arrivalMeetingPoint || "Meeting Point?";
 
         this.departSite = this.allSites?.find(elm => {
           return elm?.id == this.reservationForm.departureSite
@@ -58,7 +57,6 @@ export class ReservationSummaryComponent implements OnInit {
 
         this.arrivalSite = this.departSite;
 
-        console.log(" depart date ", this.departDate!)
         // this.arrivalSite = this.allSites.find(elm => elm?.id === this.reservationForm.arrivalSite?.id)?.name;
       }
     })

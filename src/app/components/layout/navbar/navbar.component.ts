@@ -16,18 +16,16 @@ export class NavbarComponent implements OnInit {
   isAuthenticated!:boolean;
 
   constructor(private router:Router, private authService:AuthService, private jwtService:JwtHandlerService) {
-    this.authService.getAuthState().subscribe((newState) => this.isAuthenticated = newState)
+    this.authService.getAuthState().subscribe((newState) => {
+      this.isAuthenticated = newState
+      if(this.isAuthenticated){
+        this.userEmail = this.jwtService.getEmail()!;
+      }
+    })
 
   }
 
-
   ngOnInit(): void {
-    this.userEmail = this.jwtService.getEmail()!;
-    // this.userRole = this.jwtService.getRole()!;
-    // if(this.userRole == "ROLE_EMPLOYER") this.dashboard = "/employer";
-    // else if(this.userRole == "ROLE_AGENT") this.dashboard = "/agent";
-
-    // console.log(" is authenticated " , this.isAuthenticated)
   }
 
   hasRoute(route:String) : boolean {

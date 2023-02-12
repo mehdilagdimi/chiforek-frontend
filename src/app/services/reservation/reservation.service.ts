@@ -1,3 +1,4 @@
+import { ParkService } from 'src/app/interfaces/ParkService';
 import { ISite } from 'src/app/interfaces/ISite';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -19,6 +20,8 @@ export class ReservationService {
   private departMeetings= new BehaviorSubject([]);
   // private arrivalMeetings:any = [];
 
+  selectedServicesSubj = new BehaviorSubject([{}]);
+
   reservFormSub = new BehaviorSubject({});
   current: string = 'order'
 
@@ -29,8 +32,8 @@ export class ReservationService {
     })
    }
 
-  saveReservation(reservation: reservationRequest) : Observable<Response<Reservation>>{
-    console.log(" inside ", reservation)
+  saveReservation(reservation: any) : Observable<Response<Reservation>>{
+    console.log(" inside save reserv ", reservation)
     return this.http
     .post<Response<Reservation>>(
             `${API_URL}/reservations/add`, reservation, {headers : this.headers}
@@ -57,6 +60,10 @@ export class ReservationService {
 
   getDepartMeetingsAsObs(){
     return this.departMeetings.asObservable();
+  }
+
+  getSelectedServicesSubjAsObs(){
+    return this.selectedServicesSubj.asObservable();
   }
 
   updateDepartSitesState(val:any){

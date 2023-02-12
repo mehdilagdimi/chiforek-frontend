@@ -21,8 +21,8 @@
 
 
 
-      <div [ngClass]="!showForm? 'opacity-0 w-0' : 'opacity-100 w-1/5'" class="fixed right-20 transition-all ease-in-out duration-300 delay-100">
-          <div  class="px-6 py-4 w-full h-fit flex justify-center shadow-sm rounded-md mx-3 bg-custGray/60" [ngClass]="!showForm? 'hidden' : 'flex'">
+      <div [ngClass]="!showForm? 'opacity-0 w-0' : 'opacity-100 w-1/5'" class="relative  transition-all ease-in-out duration-300 delay-100">
+          <div  class="px-6 py-4 w-full h-fit flex sticky top-28 justify-center shadow-sm rounded-md mx-3 bg-custGray/60" [ngClass]="!showForm? 'hidden' : 'flex'">
             <app-reservation-summary></app-reservation-summary>
           </div>
       </div>
@@ -40,7 +40,7 @@
 <div  [ngClass]="!showForm? 'opacity-100' : 'opacity-0'" class="container mx-auto relative transition-all ease-in-out duration-300 delay-100">
   <div class="mx-20 py-12 px-8 text-center flex justify-center items-center h-[500px]">
     <div class="my-6">
-      <h2 class="text-4xl font-bold">{{'who-we-are-title' | translate }}</h2>
+      <h2 class="text-4xl font-bold my-6">{{'who-we-are-title' | translate }}</h2>
       <p>
         {{'who-we-are-content' | translate }}
       </p>
@@ -62,7 +62,7 @@
       <img class="w-full" src="assets/howitworks.svg" />
     </div>
     <div class="w-2/3 mx-20 my-6 px-8 py-12  rounded-lg ">
-      <h2 class="text-4xl font-bold">{{'How-does-it-work-title' | translate }}</h2>
+      <h2 class="text-4xl font-bold my-6">{{'How-does-it-work-title' | translate }}</h2>
       <p class="text-md text-black">
         {{'How-does-it-work-content' | translate }}
       </p>
