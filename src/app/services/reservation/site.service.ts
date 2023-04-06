@@ -1,9 +1,9 @@
+import { City } from './../../interfaces/City';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_URL } from 'src/config/api.constants';
 import { Response } from 'src/app/interfaces/response';
 import { Observable } from 'rxjs/internal/Observable';
-import { ISite } from 'src/app/interfaces/ISite';
 
 
 @Injectable({
@@ -19,10 +19,10 @@ export class SiteService {
     })
    }
 
-   getSites() : Observable<Response<ISite[]>>{
+   getSites() : Observable<City[]>{
     return this.http
-    .get<Response<ISite[]>>(
-      `${API_URL}/sites`, {headers : this.headers}
+    .get<City[]>(
+      `${API_URL}/cities`, {headers : this.headers}
       );
     }
 

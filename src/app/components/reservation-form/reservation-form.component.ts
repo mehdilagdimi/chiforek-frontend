@@ -1,13 +1,14 @@
-import { ISite } from 'src/app/interfaces/ISite';
+
 import { ReservationService } from './../../services/reservation/reservation.service';
-import { formatDate } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SiteService } from 'src/app/services/reservation/site.service';
-import { reservationRequest } from 'src/app/interfaces/reservationRequest';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ParkService } from 'src/app/interfaces/ParkService';
+import { Service } from 'src/app/interfaces/Service';
+import { City } from 'src/app/interfaces/City';
+import { reservationRequest } from 'src/app/interfaces/reservationRequest';
 
 @Component({
   selector: 'app-reservation-form',
@@ -21,9 +22,9 @@ export class ReservationFormComponent implements OnInit {
     services: ParkService[]
   };
 
+  services:Service[] = [];
+  cities:City[] = [];
   departMinDate!:any;
-  departureSites:ISite[] = [];
-  arrivalSites:ISite[] = [];
   departureHours:any[] = [];
   arrivalHours:any[] = [];
   departureMeetingPoints:any[] = [];
@@ -44,17 +45,22 @@ export class ReservationFormComponent implements OnInit {
   selectUndefinedOptionValue:any;
 
   constructor(private reservationService:ReservationService, private authService:AuthService, private siteService:SiteService, private router:Router) {
-
     this.authService.getAuthState().subscribe((newState) => {
       this.isAuthenticated = newState
-    })
+    });
+  }
 
+  ngOnInit(): void {
+    this.services = [
+      {name : "TRANSPORT"},
+      {name : "RELOCATION"},
+      {name : "CAR_POOLING"}
+    ]
     // get sites
     this.siteService.getSites().subscribe(
-      response => {
-                 this.departureSites = response.data.data;
-                 this.reservationService.updateDepartSitesState(this.departureSites);
-                 this.arrivalSites = response.data.data;
+      (response) => {
+                 this.cities = response;
+                 this.reservationService.updateDepartSitesState(this.cities);
       });
 
       this.reservationForm = new FormGroup({
@@ -62,47 +68,25 @@ export class ReservationFormComponent implements OnInit {
           Validators.required,
           ],
         ),
-        departureMeetingPoint: new FormControl(null, [
-          // Validators.required
-        ]
-        ),
-        arrivalMeetingPoint: new FormControl(null,[
-          // Validators.required,
-          ],),
         arrivalSite: new FormControl(null,[
           Validators.required,
-          ],),
-        departureHour: new FormControl(null,[
-          Validators.required
           ],),
         departureDate: new FormControl(null,[
           Validators.required
           ],),
-        arrivalHour: new FormControl(null,[
+        service: new FormControl(null, [
           Validators.required
-          ],),
-        arrivalDate: new FormControl(null,[
-          Validators.required
-          ],),
-        departureFlightNumber: new FormControl(null,[
-          ],),
-        arrivalFlightNumber: new FormControl(null,[
-          ],),
+        ],),
       })
 
       this.departMinDate = new Date().toLocaleDateString('pt-br').split( '/' ).reverse( ).join( '-' );
-      // console.log(" date ", this.departMinDate)
-  }
 
-  ngOnInit(): void {
-    this.reservationForm.valueChanges.subscribe(newFormState => {
-      console.log(" form state ", newFormState)
-      this.reservationService.reservFormSub.next(newFormState);
+      this.reservationForm.valueChanges.subscribe(newFormState => {
+        console.log(" form state ", newFormState)
+        this.reservationService.reservFormSub.next(newFormState);
     })
 
-    this.reservationService.getSelectedServicesSubjAsObs().subscribe((val) => {
-        this.selectedServices = val as ParkService[];
-    })
+
   }
 
   onShowDetailedForm(event:any){
@@ -191,7 +175,7 @@ export class ReservationFormComponent implements OnInit {
 
   onError(){
     this.isSuccess = false;
-    alert("Mercie de sélectionner un point de ")
+    alert("Merci de sélectionner un point de ")
   }
 
 
@@ -201,12 +185,6 @@ export class ReservationFormComponent implements OnInit {
 
   get departureSite (){ return this.reservationForm.get('departureSite')};
   get arrivalSite (){ return this.reservationForm.get('arrivalSite')};
-  get departureMeetingPoint (){ return this.reservationForm.get('departureMeetingPoint')};
-  get arrivalMeetingPoint (){ return this.reservationForm.get('arrivalMeetingPoint')};
   get departureDate (){ return this.reservationForm.get('departureDate')};
-  get departureHour (){ return this.reservationForm.get('departureHour')};
-  get arrivalDate (){ return this.reservationForm.get('arrivalDate')};
-  get arrivalHour (){ return this.reservationForm.get('arrivalHour')};
-  get departureFlightNumber (){ return this.reservationForm.get('departureFlightNumber')};
-  get arrivalFlightNumber (){ return this.reservationForm.get('arrivalFlightNumber')};
+  get service() {return this.reservationForm.get('service')};
 }

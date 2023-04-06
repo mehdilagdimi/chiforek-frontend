@@ -19,13 +19,13 @@ export class AppHttpInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    const token = this.authStorageService.get("govalet-token") ?? '';
+    const token = this.authStorageService.get("chiforek-token") ?? '';
     this.jwtService.setToken(token);
 
 
     if (token) {
       if(this.jwtService.isTokenExpired()) {
-        this.authStorageService.remove("govalet-token");
+        this.authStorageService.remove("chiforek-token");
         return next.handle(request);
       }
 

@@ -1,4 +1,4 @@
-import { ISite } from 'src/app/interfaces/ISite';
+import { City } from './../../interfaces/City';
 import { ReservationService } from './../../services/reservation/reservation.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
@@ -21,8 +21,8 @@ export class ReservationSummaryComponent implements OnInit {
   arrivalSite:any = {name:"Site"};
   price:any = "...";
 
-  allSites:ISite[] = [];
-  allMeeting:ISite[] = [];
+  allSites:City[] = [];
+  allMeeting:City[] = [];
 
   constructor(private reservService:ReservationService) {
     this.reservService.getDepartSitesAsObs().subscribe(
@@ -45,14 +45,9 @@ export class ReservationSummaryComponent implements OnInit {
       if(val){
         this.reservationForm = val as reservationRequest;
         this.departDate = this.reservationForm.departureDate || "Date" ;
-        this.checkin = this.reservationForm.departureHour || "Checkin" ;
-        this.arrivalDate = this.reservationForm.arrivalDate || "Date";
-        this.checkout = this.reservationForm.arrivalHour || "Checkout" ;
-        this.departMeetingPoint = this.reservationForm.departureMeetingPoint || "Meeting Point?";
-        this.arrivalMeetingPoint = this.reservationForm.arrivalMeetingPoint || "Meeting Point?";
 
         this.departSite = this.allSites?.find(elm => {
-          return elm?.id == this.reservationForm.departureSite
+          return elm?.name == this.reservationForm.departureSite
         });
 
         this.arrivalSite = this.departSite;

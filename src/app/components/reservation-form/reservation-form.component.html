@@ -19,7 +19,7 @@
               <!-- </div> -->
               <div class="my-2  h-full rounded-sm">
                 <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                <label for="address" class="mx-2 pb-2 font-semibold">SITE</label>
+                <label for="address" class="mx-2 pb-2 font-semibold">City</label>
                 <select
                   id="departureSite"
                   formControlName="departureSite"
@@ -28,10 +28,10 @@
                   (change)="onDateOrSiteChange()"
                 >
                 <!-- <option ngValue="undefined" [selected]="true" disabled="disabled">Select depature site</option> -->
-                <option [ngValue]="null" disabled>Select depature site</option>
+                <option [ngValue]="null" disabled>Select departure city</option>
                 <option
-                *ngFor="let departureSite of departureSites"
-                [ngValue]="departureSite.id"
+                *ngFor="let departureSite of cities"
+                [ngValue]="departureSite.name"
                 >
                 {{ departureSite.name }}
               </option>
@@ -44,43 +44,14 @@
                   class="text-red-500 text-sm"
                 >
                   <div *ngIf="departureSite?.errors?.['required']">
-                    Departure Site is required.
+                    Departure City is required.
                   </div>
                 </div>
               </div>
 
 
            <!-- Arrival -->
-              <div *ngIf="showDetailedForm" class="my-2  w-full rounded-sm">
-                <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                <label for="address" class="mx-2 pb-2 font-semibold">MEETING POINT</label>
-                <select
-                  id="departureMeetingPoint"
-                  formControlName="departureMeetingPoint"
-                  name="departureMeetingPoint"
-                  class="border h-[50px] w-full px-4 outline-none rounded-md text-sm focus:border focus:border-custGreen1"
-                >
-                <option [ngValue]="null" disabled>Select meeting point</option>
-                <option value=1>Terminal 1</option>
-                  <option
-                    *ngFor="let departureMeetingPoint of departureMeetingPoints"
-                    [ngValue]="departureMeetingPoint"
-                  >
-                    {{ departureMeetingPoint }}
-                  </option>
-                </select>
-                <div
-                  *ngIf="
-                    departureMeetingPoint?.invalid &&
-                    (departureMeetingPoint?.dirty || departureMeetingPoint?.touched)
-                  "
-                  class="text-red-500 text-sm"
-                >
-                  <div *ngIf="departureMeetingPoint?.errors?.['required']">
-                    Departure Meeting Point required.
-                  </div>
-                </div>
-              </div>
+
 
               <div class="flex justify-between">
                   <div class="mr-1 my-2 w-full rounded-sm">
@@ -101,47 +72,8 @@
 
 
                   </div>
-                  <!-- CHECKIN  HOUR-->
-                  <div *ngIf="showDepartHour" class="ml-1 my-2  w-full rounded-sm">
-                    <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                    <label for="address" class="mx-2 pb-2 font-semibold">CHECK IN</label>
-                    <select
-                    id="departureHour"
-                    formControlName="departureHour"
-                    name="departureHour"
-                    [ngClass]="!showDepartHour? 'opacity-0' : 'opacity-100'"
-                    class="border h-[50px] w-full px-4 outline-none rounded-md text-sm focus:border focus:border-custGreen1"
-                  >
-                  <option [ngValue]="null" disabled>RDV</option>
 
-                    <option
-                      *ngFor="let departureHour of departureHours"
-                      [ngValue]="departureHour"
-                    >
-                      {{ departureHour }}
-                    </option>
-                  </select>
-                  <div
-                      *ngIf="
-                        departureHour?.invalid &&
-                        (departureHour?.dirty || departureHour?.touched)
-                      "
-                      class="text-red-500 text-sm"
-                    >
-                      <div *ngIf="departureHour?.errors?.['required']">
-                      departureHour required.
-                      </div>
-                    </div>
-                  </div>
               </div>
-
-              <!-- Flight number -->
-              <div *ngIf="showDetailedForm" class="mr-1 my-2 w-full rounded-sm">
-                  <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                  <label for="address" class="mx-2 pb-2 font-semibold">Flight Number</label>
-                  <input type="text" placeholder="Enter Flight Number" formControlName="departureFlightNumber" name="departureFlightNumber"  class="border h-[50px] w-full rounded-md px-3 outline-none focus:border focus:border-custGreen1" />
-              </div>
-
 
 
 
@@ -150,18 +82,18 @@
                        <h2 class="text-custGreen1 text-center my-4 font-bold text-xl">ARRIVAL</h2>
                        <div class="my-2  w-full rounded-sm">
                          <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                         <label for="address" class="mx-2 pb-2 font-semibold">SITE</label>
+                         <label for="address" class="mx-2 pb-2 font-semibold">City</label>
                          <select
                            id="arrivalSite"
                            formControlName="arrivalSite"
                            name="departureSite"
                            class="border h-[50px] w-full px-3 outline-none rounded-md text-sm focus:border focus:border-custGreen1 "
                          >
-                          <option [ngValue]="null" disabled>Select arrival site</option>
+                          <option [ngValue]="null" disabled>Select arrival city</option>
 
                            <option
-                             *ngFor="let arrivalSite of arrivalSites"
-                             [ngValue]="arrivalSite.id"
+                             *ngFor="let arrivalSite of cities"
+                             [ngValue]="arrivalSite.name"
                            >
                              {{ arrivalSite.name }}
                            </option>
@@ -174,106 +106,43 @@
                            class="text-red-500 text-sm"
                          >
                            <div *ngIf="departureSite?.errors?.['required']">
-                             Arrival Site is required.
+                             Arrival City is required.
                            </div>
                          </div>
                        </div>
 
 
-                       <div *ngIf="showDetailedForm" class="my-2  w-full rounded-sm">
-                         <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                         <label for="address" class="mx-2 pb-2 font-semibold">MEETING POINT</label>
-                         <select
-                           id="arrivalMeetingPoint"
-                           formControlName="arrivalMeetingPoint"
-                           name="arrivalMeetingPoint"
-                           class="border h-[50px] w-full px-4 outline-none rounded-md text-sm focus:border focus:border-custGreen1"
-                         >
-                         <option [ngValue]="null" disabled>Select meeting point</option>
-                         <option value=1>Terminal 1</option>
-                           <option
-                             *ngFor="let arrivalMeetingPoint of arrivalMeetingPoints"
-                             [ngValue]="arrivalMeetingPoint"
-                           >
-                             {{ arrivalMeetingPoint }}
-                           </option>
-                         </select>
-                         <div
-                           *ngIf="
-                             arrivalMeetingPoint?.invalid &&
-                             (arrivalMeetingPoint?.dirty || arrivalMeetingPoint?.touched)
-                           "
-                           class="text-red-500 text-sm"
-                         >
-                           <div *ngIf="departureMeetingPoint?.errors?.['required']">
-                             Departure Meeting Point required.
-                           </div>
-                         </div>
-                       </div>
+              <!-- SERVICE TYPE -->
+              <div class="my-2 w-full rounded-sm">
+                <!-- <div class="col-span-2 bg-red-200 "></div> -->
+                <label for="address" class="mx-2 pb-2 font-semibold">Service</label>
+                <select
+                  id="service"
+                  formControlName="service"
+                  name="service"
+                  class="border h-[50px] w-full px-3 outline-none rounded-md text-sm focus:border focus:border-custGreen1 "
+                >
+                <option [ngValue]="null" disabled>Select service type</option>
 
-
-                       <div class="flex justify-between">
-                              <!-- Arrival Date -->
-                          <div class="mr-1 my-2  w-full rounded-sm">
-                            <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                            <label for="address" class="mx-2 pb-2 font-semibold">DATE</label>
-                            <input class="border h-[50px] w-full px-3 rounded-md outline-none focus:border focus:border-custGreen1" [min]="selectedDepartDateRef.value"  type="text" placeholder="Enter Date" onfocus="(this.type='date')" onblur="if(this.value==''){this.type='text'}" formControlName="arrivalDate" name="arrivalDate"  />
-                              <div
-                              *ngIf="
-                                arrivalDate?.invalid &&
-                                (arrivalDate?.dirty || arrivalDate?.touched)
-                              "
-                              class="text-red-500 text-sm"
-                            >
-                              <div *ngIf="arrivalDate?.errors?.['required']">
-                                Arrival Date Point required.
-                              </div>
-                            </div>
-                          </div>
-
-                          <!-- CHECKOUT  HOUR-->
-                          <div *ngIf="showArriveHour"class="ml-1 my-2  w-full rounded-sm">
-                            <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                            <label for="address" class="mx-2 pb-2 font-semibold">CHECK OUT</label>
-                            <select
-                            id="arrivalHour"
-                            formControlName="arrivalHour"
-                            name="arrivalHour"
-                            class="border h-[50px] w-full px-4 outline-none rounded-md text-sm focus:border focus:border-custGreen1"
-                          >
-                          <option [ngValue]="null" disabled>RDV</option>
-
-                            <option
-                              *ngFor="let arrivalHour of arrivalHours"
-                              [ngValue]="arrivalHour"
-                            >
-                              {{ arrivalHour }}
-                            </option>
-                          </select>                          <div
-                              *ngIf="
-                                arrivalHour?.invalid &&
-                                (arrivalHour?.dirty || arrivalHour?.touched)
-                              "
-                              class="text-red-500 text-sm"
-                            >
-                              <div *ngIf="arrivalHour?.errors?.['required']">
-                                arrivalHour required.
-                              </div>
-                            </div>
-                          </div>
-                       </div>
-
-                  <!-- Flight number -->
-                  <div *ngIf="showDetailedForm" class="mr-1 my-2 w-full rounded-sm">
-                      <!-- <div class="col-span-2 bg-red-200 "></div> -->
-                      <label for="address" class="mx-2 pb-2 font-semibold">Flight Number</label>
-                      <input type="text" placeholder="Enter Flight Number" formControlName="arrivalFlightNumber" name="arrivalFlightNumber"  class="border h-[50px] w-full rounded-md px-3 outline-none focus:border focus:border-custGreen1" />
+                  <option
+                    *ngFor="let service of services"
+                    [ngValue]="service.name"
+                  >
+                    {{ service.name }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="
+                  service?.invalid &&
+                    (service?.dirty || service?.touched)
+                  "
+                  class="text-red-500 text-sm"
+                >
+                  <div *ngIf="service?.errors?.['required']">
+                    Service is required.
                   </div>
-
-
-
-
-
+                </div>
+              </div>
 
 
             <!-- !reservationForm.valid ? 'bg-gray-400' : 'bg-custGreen1' -->
@@ -284,7 +153,7 @@
             [disabled]="!reservationForm.valid || showQuote"
             id="submitBtnId"
             class="w-full my-4 {{
-                !reservationForm.valid  || showQuote? 'bg-gray-400' : 'bg-green-800/50'
+                !reservationForm.valid  || showQuote? 'bg-gray-400' : 'bg-custOrangeStr'
                 }}  shadow-sm rounded-md py-3 text-white text-lg font-semibold
                 {{showQuote ? 'cursor-not-allowed' :''}}"
             >

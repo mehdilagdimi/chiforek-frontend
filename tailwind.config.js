@@ -9,10 +9,11 @@ module.exports = {
   theme: {
     extend: {
       colors : {
-        'custGreen1' : '#68C3A3',
-        'custGreen2' : '#66CC99',
-        'custGreen3' : '#9FD9B0',
-        'custGray' : '#BFCCAE'
+        'custGreen1' : '#E7BB31',
+        'custGreen2' : '#E7BB31',
+        'custGreen3' : '#E7BB31',
+        'custGray' : '#E7BB31',
+        'custOrangeStr':"#E7BA2E"
       }
     },
   },

@@ -28,7 +28,7 @@ export class ReservationQuoteComponent implements OnInit {
       } else {
         this.reservForm = val as reservationRequest
       }
-      this.reserDates = [this.reservForm.arrivalDate!, this.reservForm.departureDate!];
+      // this.reserDates = [this.reservForm.arrivalDate!, this.reservForm.departureDate!];
 
     })
   }

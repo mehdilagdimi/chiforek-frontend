@@ -4,7 +4,6 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { SignupRequest } from 'src/app/interfaces/signupRequest';
 import { JwtHandlerService } from './jwt-handler.service';
-import { Response } from 'src/app/interfaces/response';
 import { API_URL } from 'src/config/api.constants';
 import { LoginRequest } from 'src/app/interfaces/loginRequest';
 
@@ -30,23 +29,23 @@ export class AuthService {
       )
    }
 
-   signup(newUser : SignupRequest) : Observable<Response<String>>{
+   signup(newUser : SignupRequest) : Observable<String>{
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     })
     return this.http
             .post<any>(
-              `${API_URL}/signup`, newUser, {headers}
+              `${API_URL}/auth/signup`, newUser, {headers}
             );
   }
 
-  login(loginCredentials : LoginRequest) {
+  login(loginCredentials : LoginRequest) : Observable<String> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     })
     return this.http
-            .post<Response<String>>(
-              `${API_URL}/auth`, loginCredentials, {headers}
+            .post<String>(
+              `${API_URL}/auth/login`, loginCredentials, {headers}
             );
   }
 
@@ -60,7 +59,7 @@ export class AuthService {
 
 
   logout() {
-    localStorage.removeItem("govalet-token");
+    localStorage.removeItem("chiforek-token");
     this.setAuthState(false);
   }
 }

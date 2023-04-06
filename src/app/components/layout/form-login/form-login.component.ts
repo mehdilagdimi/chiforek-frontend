@@ -54,23 +54,23 @@ export class FormLoginComponent implements OnInit {
 
 
   onSubmit() {
-    console.log(" login form")
+    console.log(" login form" )
     this.loading = true;
     this.authService.login(this.loginForm.value).subscribe({
         next : (response) => {
-          if(response.status == 200){
-            this.jwt = response.data.data;
-            this.storageService.set("govalet-token", this.jwt.toString());
+            this.jwt = response;
+            this.storageService.set("chiforek-token", this.jwt.toString());
             this.authService.setAuthState(true);
             // this.isAuthenticated = true;
             // this.router.navigate(['/home'])
             // .then(() => {
             //   window.location.reload();
             // });
-          }
         },
 
         error : (err) => {
+          console.log(" erreur ")
+          console.log(" erreur " + err)
           this.authService.setAuthState(false);
           // this.isAuthenticated = false;
           alert("Invalid login credentials");

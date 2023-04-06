@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-app.use(express.static(__dirname + '/dist/govalet-app'));
+app.use(express.static(__dirname + '/dist/chiforek-app'));
 app.get('/*', function(req,res) {
 res.sendFile(path.join(__dirname+
-'/dist/govalet-app/index.html'));});
+'/dist/chiforek-app/index.html'));});
 app.listen(process.env.PORT || 8080);
