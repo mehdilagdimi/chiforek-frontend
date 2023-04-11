@@ -23,7 +23,7 @@
   </div>
 </div>
 <nav aria-label="Page navigation">
-  <ul class="inline-flex">
+  <ul class="flex  justify-center mx-auto my-4">
     <li><button class="border border-custGray h-10 px-5 text-indigo-600 transition-colors duration-150 bg-white rounded-l-lg focus:shadow-outline hover:bg-custGray/60">Prev</button></li>
     <!-- doforeach -->
       <li *ngFor="let r of [].constructor(totalOfPages); let i = index"><a (click)="setCurrentPage(i+1)" [ngClass]="{'text-white bg-custGray hover:bg-custGray': currentPage == i+1}" class="border border-custGray flex items-center h-10 px-5 align-middle cursor-pointer transition-colors duration-150 bg-white focus:shadow-outline hover:bg-custGray/60 ">{{i+1}}</a></li>

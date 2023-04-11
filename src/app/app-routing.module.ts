@@ -1,3 +1,5 @@
+import { ProviderDashboardComponent } from './components/pages/provider-dashboard/provider-dashboard.component';
+import { OffersComponent } from './components/pages/offers/offers.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/pages/home/home.component';
@@ -11,7 +13,9 @@ const routes: Routes = [
   {path:"home", component: HomeComponent },
   {path:"login", component: LoginComponent },
   {path:"signup", component: SignupComponent },
-  {path:"dashboard", component : AdminDashboardComponent},
+  {path:"offers", component : OffersComponent},
+  {path:"dashboard/admin", component : AdminDashboardComponent},
+  {path:"dashboard/provider", component : ProviderDashboardComponent},
   {path:"**", component : PageNotFoundComponent}
 ];
 

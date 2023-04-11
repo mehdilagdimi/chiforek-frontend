@@ -29,7 +29,7 @@ export class AdminDashboardComponent implements OnInit {
     this.current = value
     this.httpClient.get(`${API_URL}/${value}`).subscribe({
       next: (response:any) => {
-        this.dashboardService.dataChange.next(response.data.data)
+        this.dashboardService.dataChange.next(response)
         console.log(this.dashboardService.data)
       }
     })

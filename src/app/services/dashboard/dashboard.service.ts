@@ -16,7 +16,7 @@ export class DashboardService {
 
     this.httpClient.get(`${API_URL}/reservations`).subscribe({
       next: (response: any) => {
-        this.dataChange.next(response.data.data)
+        this.dataChange.next(response)
       }
     })
 

@@ -9,7 +9,7 @@ import { LocalStorageService } from './services/auth/local-storage.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'govalet-app';
+  title = 'chiforek-app';
   constructor(private router:Router, private translateService:TranslateService){
     this.translateService.setDefaultLang('fr');
     this.translateService.use(localStorage.getItem("lang") || "fr")
